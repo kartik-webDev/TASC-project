@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRef, useContext, useEffect, useState } from "react";
-import { useAppContext, AppContext } from "@/context/AppContext";
+import { AppContext } from "@/context/AppContext";
 import {handleLogout} from "../Components/useAuthListener"
 import LoginPage from "../loginPage/page";
 import Link from "next/link";
