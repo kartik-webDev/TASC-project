@@ -4,7 +4,8 @@ import Navbar from './Components/Navbar'
 const page = () => {
   return (
     <div>
-      <div className='justify-center text-4xl items-center mt-50 flex'>Hi my name is Kartik</div>
+      <div className='justify-center text-4xl items-center mt-50 flex'>Hi my name is NextJS</div>
+      
       <Navbar/>
     </div>
   )

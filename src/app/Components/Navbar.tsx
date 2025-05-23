@@ -23,11 +23,13 @@ const Navbar = () => {
     const context = useContext(AppContext);
 
     const logout = async () => {
-    await handleLogout(setUser); // ✅ Clears Firebase session properly
-    router.push("/"); // ✅ Redirect to home after logout
+    await handleLogout(setUser); //  Clears Firebase session properly
+    router.push("/"); //  Redirect to home after logout
     };
 
-      useEffect(() => {
+// fire base google login render
+
+    useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });

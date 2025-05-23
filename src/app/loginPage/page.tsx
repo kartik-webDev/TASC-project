@@ -47,7 +47,6 @@ const LoginPage = () => {
       }
       const user = userCredential.user;
 
-      setUser(userCredential.user);
       router.replace("/");
       setIsLoginFormOpen(false);
       toast.success(`Welcome, ${userCredential.user.displayName || name}!`);
