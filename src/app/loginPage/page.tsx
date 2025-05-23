@@ -12,7 +12,7 @@ const LoginPage = () => {
     throw new Error("LoginPage must be used within an AppContextProvider");
   }
 
-  const { router, setUser, setIsLoginFormOpen } = context;
+  const { router, setUser, setIsLoginFormOpen,  } = context;
   const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,6 +22,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const result = await signInWithPopup(auth, provider);
+      console.log("User Info:", result.user);
       toast.success(`Welcome, ${result.user.displayName || "User"}!`);
       setIsLoginFormOpen(false);
     } catch (error) {
@@ -44,6 +45,7 @@ const LoginPage = () => {
       } else {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
       }
+      const user = userCredential.user;
 
       setUser(userCredential.user);
       router.replace("/");
@@ -81,6 +83,14 @@ const LoginPage = () => {
           <p>Password</p>
           <input onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Type here" className="border border-gray-200 rounded w-full p-2 mt-1 outline-indigo-500" type="password" required />
         </div>
+        {state === "login" && (
+            <a className="text-blue-600 cursor-pointer ">Forgot Password</a>
+          )}
+        {state === "register" ? (
+            <p>Already have an account? <span onClick={() => setState("login")} className="text-indigo-500 cursor-pointer">Click here</span></p>
+        ) : (
+            <p>Create an account? <span onClick={() => setState("register")} className="text-indigo-500 cursor-pointer">Click here</span></p>
+        )}
 
         {/* Sign Up or Login Button */}
         <button className="bg-indigo-500 hover:bg-indigo-600 transition-all text-white w-full py-2 rounded-md cursor-pointer">
@@ -89,9 +99,10 @@ const LoginPage = () => {
 
         {/* Google Sign-In */}
         {state === "login" && (
-          <button onClick={GoogleSignUp} type="button" className="cursor-pointer w-full flex items-center justify-center my-3 bg-white border border-gray-500/30 py-2.5 rounded-full text-gray-800">
-            Sign In with Google
-          </button>
+        <button onClick={GoogleSignUp} type="button" className="w-full flex items-center gap-2 justify-center my-3 bg-white border border-gray-500/30 py-2.5 rounded-full text-gray-800">
+            <img className="h-4 w-4" src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/login/googleFavicon.png" alt="googleFavicon"/>
+            Log in with Google
+        </button>
         )}
       </form>
     </div>

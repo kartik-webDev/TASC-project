@@ -6,10 +6,17 @@ import { AppContext } from "@/context/AppContext";
 import {handleLogout} from "../Components/useAuthListener"
 import LoginPage from "../loginPage/page";
 import Link from "next/link";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../Config/firebaseConfig";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline"; // Logout icon
+
+
 const Navbar = () => {
 
+    
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [showLogout, setShowLogout] = useState(false);
 
     const ref = useRef<HTMLDivElement | null>(null);
 
@@ -19,6 +26,14 @@ const Navbar = () => {
     await handleLogout(setUser); // ✅ Clears Firebase session properly
     router.push("/"); // ✅ Redirect to home after logout
     };
+
+      useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
     if (!context) {
         throw new Error('SomeComponent must be used within an AppContextProvider');
@@ -111,11 +126,35 @@ const Navbar = () => {
 
                 {/* Mobile Menu Button */}
                 <div className="flex items-center gap-3 md:hidden">
+                    {!user ? (
                     <svg onClick={() => setIsMenuOpen(!isMenuOpen)} className={`h-6 w-6 cursor-pointer ${isScrolled ? "invert" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                         <line x1="4" y1="6" x2="20" y2="6" />
                         <line x1="4" y1="12" x2="20" y2="12" />
                         <line x1="4" y1="18" x2="20" y2="18" />
                     </svg>
+                 ) : (
+                    <div className="relative flex flex-col items-center gap-2">
+            {/* User Profile Image */}
+        <img
+              src={user.photoURL || "https://www.w3schools.com/howto/img_avatar.png"}
+              className="w-8 h-8 rounded-full object-cover border border-gray-300 cursor-pointer"
+              alt="User Avatar"
+              onClick={() => setShowLogout(!showLogout)}
+            />
+
+
+            {/* Logout Button (Icon-Based, Always Visible) */}
+             {showLogout && (
+
+            <button
+              onClick={logout}
+            >
+              <ArrowLeftOnRectangleIcon className="w-8 h-8" />
+            </button>
+             )}
+          </div>
+
+                )}
                 </div>
                 
 

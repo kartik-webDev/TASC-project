@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 interface AppContextType {
-  showUserLogin: boolean;
+  showUserLogin: any;
   setShowUserLogin: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoginFormOpen: React.Dispatch<React.SetStateAction<boolean>>;
   user: any; // Replace 'any' with a specific user type if available
