@@ -31,7 +31,8 @@ TASC (Thoda Aaram Se Chalaiye) is a web application dedicated to prioritizing pa
 
 ### Frontend
 
-- React.js for web interface
+- Next JS for web interface
+- Typescript 
 - Tailwind for styling
 ### Backend
 
