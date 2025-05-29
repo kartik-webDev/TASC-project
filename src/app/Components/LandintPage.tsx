@@ -24,7 +24,7 @@ const LandingPage = () => {
     }
 
   return (
-  <div className='bg-gray-200 overflow-hidden flex flex-col space-y-10 '>
+  <div className='overflow-hidden flex flex-col space-y-10 '>
     <div className="relative">
         <div className="relative px-10 py-50 bg-amber-300">
             <div className="absolute text-5xl top-10 left-20">Thoda Aaram Se Chalaiye</div>
@@ -53,8 +53,8 @@ const LandingPage = () => {
 
 {/* guideline section */}
     
-<div id='saftey' className="flex items-center justify-center w-full h-screen mb-10  ">
-  <div className="bg-white p-4 mx-auto w-[1400px] h-auto rounded-lg mt-auto top-0">
+    <div id='saftey' className="flex items-center justify-center w-full h-screen mb-10  ">
+    <div className="bg-white p-4 mx-auto w-[1400px] h-auto rounded-lg mt-auto top-0">
 
     {/* rider saftey */}
 
