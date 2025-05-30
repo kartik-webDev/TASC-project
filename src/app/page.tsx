@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
 import LandingPage from './Components/LandintPage'
-import Footer from './Components/Footer'
 const page = () => {
   return (
     <div className=''>
@@ -9,7 +8,7 @@ const page = () => {
       
       {/* <Navbar/> */}
       <LandingPage/>
-      <Footer/>
+
     </div>
   )
 }
