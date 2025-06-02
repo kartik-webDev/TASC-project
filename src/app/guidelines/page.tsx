@@ -2,8 +2,6 @@
 "use client"
 import React, { useContext } from 'react';
 import Image from 'next/image';
-import { error } from 'console';
-import { AppContext } from '@/context/AppContext';
 import { useRouter } from 'next/navigation'
 const GuidelinesPage = ()=> {
 
@@ -34,7 +32,7 @@ const feedbackBtn = ()=>{
       <div className="flex flex-col md:flex-row items-center gap-6">
         <div className="md:w-1/2">
           <img
-            src="https://media.istockphoto.com/id/1470035625/photo/driver-transporting-a-business-man-on-a-crowdsourced-taxi.jpg?s=612x612&w=0&k=20&c=HbVWN87JGim9g0CDhh2NHPM8oZ1g4qVGx86vxJ5RM24="
+            src="https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png"
             alt="Start Ride"
             className="rounded-lg shadow-md"
             width={600}
