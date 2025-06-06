@@ -1,0 +1,130 @@
+"use client"
+import { useState } from "react";
+
+export default function Page() {
+  const [showFullDetails, setShowFullDetails] = useState(false);
+
+  return (
+    <div className="p-6 mt-50">
+      <nav className="w-full h-10 flex justify-between">
+        <div className="text-black text-2xl flex flex-wrap gap-10">
+          <span onClick={()=> setShowFullDetails(false)}>Hide</span>
+          <span>show</span>
+        </div>
+      </nav>
+      {!showFullDetails ? ( // Show Summary Initially
+        <>
+          <h2 className="text-lg font-bold">Summary</h2>
+          <p>This is a short summary of the content...</p>
+          <button
+            onClick={() => setShowFullDetails(true)}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            Read More
+          </button>
+        </>
+      ) : ( // Replace Summary with Full Details
+        <div className="mt-4 p-4 border rounded">
+          <h3 className="text-lg font-bold">Full Details</h3>
+          <p>Here are the complete details that replace the summary...</p>
+
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+
+// new example
+
+"use client"
+import React,{ useState } from "react";
+
+import Image from "next/image";
+
+ function LandingPage() {
+  const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
+
+// Define type for image data
+interface ImageData {
+  id: number;
+  src: string;
+  alt: string;
+  details: string;
+}
+
+const images: ImageData[] = [
+  { id: 1, src: "/car.png", alt: "Image 1", details: "This is Image 1's description." },
+  { id: 2, src: "/honk.png", alt: "Image 2", details: "This is Image 2's detailed view." },
+  { id: 3, src: "/banner.jpg", alt: "Image 3", details: "Here are Image 3's insights." },
+  { id: 4, src: "/hands.png", alt: "Image 4", details: "Details about Image 4 go here." }
+];
+
+  return (
+    <div className="p-6">
+      {!selectedImage ? (
+        // Display all images initially
+        <div>
+          <h1 className="text-2xl font-bold">Welcome to My Homepage</h1>
+          <p>Click an image to see details...</p>
+
+          {/* Image Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {images.map((img) => (
+              <Image
+                key={img.id}
+                src={img.src}
+                width={200}
+                height={150}
+                alt={img.alt}
+                className="cursor-pointer hover:opacity-80 transition"
+                onClick={() => setSelectedImage(img)}
+              />
+            ))}
+          </div>
+
+          {/* Other Data (Hidden when image is clicked) */}
+          <div className="mt-6">
+            <h2 className="text-xl font-bold">Additional Information</h2>
+            <p>This content will be hidden when an image is selected.</p>
+          </div>
+        </div>
+      ) : (
+        // Display only the selected image's details
+        <div className="text-center">
+          <Image src={selectedImage.src} width={400} height={300} alt={selectedImage.alt} />
+          <p className="text-lg mt-4">{selectedImage.details}</p>
+          <button
+            onClick={() => setSelectedImage(null)}
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+          >
+            Back to Homepage
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+export default LandingPage
+
+
+
+
+
+
+
+
+
+              <div className='flex flex-col gap-10 justify-center items-center'>
+                {images.map((image, i)=> (
+                  <Image 
+                  key={i}
+                  src={image.src}
+                  width={700}
+                  height={900}
+                  alt={image.alt}
+                   />
+                ))}
+              </div>
