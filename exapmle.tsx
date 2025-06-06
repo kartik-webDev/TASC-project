@@ -16,6 +16,7 @@
 //         'honk': MessageSquare
 //     }
 // // button 
+<<<<<<< HEAD
     //     const nextbutton = (): void => {
     //   // Ensure at least one feedback item has been selected
     //         const hasFeedback = Object.values(feedbackItems).some(category => category.length > 0);
@@ -30,6 +31,22 @@
     //             setActiveStep(activeStep + 1);
     //         }
     //     };
+=======
+//     //     const nextbutton = (): void => {
+//     //   // Ensure at least one feedback item has been selected
+//     //         const hasFeedback = Object.values(feedbackItems).some(category => category.length > 0);
+    
+//     //         if (!hasFeedback) {
+//     //             toast.error("Please select atleast one feedback");
+//     //             return; // Stop execution if no feedback is selected
+//     //         }
+    
+//     //     // Proceed to the next step only if within valid step range
+//     //         if (activeStep < steps.length - 1) {
+//     //             setActiveStep(activeStep + 1);
+//     //         }
+//     //     };
+>>>>>>> 8626a11cdb54d1a198f66c0f37ca1a6af2e98c9e
 
 //     category: keyof FeedbackItems, item: string)
     
