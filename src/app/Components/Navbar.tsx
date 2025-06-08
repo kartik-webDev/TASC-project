@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "@/context/AppContext";
+import { AppContext, useAppContext } from "@/context/AppContext";
 import { handleLogout } from "../Components/useAuthListener";
 import LoginPage from "../loginPage/page";
 import Link from "next/link";
@@ -10,10 +10,13 @@ import { auth } from "../Config/firebaseConfig";
 import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline"; // Logout icon
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
 
   const context = useContext(AppContext);
+
+    //  react context api
+
+    const {setIsMenuOpen, isMenuOpen } = useAppContext()
 
   const logout = async () => {
     await handleLogout(setUser); // Clears Firebase session properly
@@ -33,13 +36,13 @@ const Navbar = () => {
     throw new Error("Navbar must be used within an AppContextProvider");
   }
 
-  const { router, setShowUserLogin, user, setUser, setIsLoginFormOpen, isLoginFormOpen } = context;
+  const { router, user, setUser, setIsLoginFormOpen, isLoginFormOpen } = context;
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Guidelines", path: "/guidelines" },
     { name: "Feedback", path: "/feedback" },
-    { name: "About", path: "/" },
+    // { name: "About", path: "/" },
   ];
 
   return (

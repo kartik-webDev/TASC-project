@@ -1,10 +1,12 @@
 "use client"
-import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '@/context/AppContext';
+import React, {  useEffect } from 'react'
+import  {useAppContext } from '@/context/AppContext';
 import {motion} from 'framer-motion'
 import Image from 'next/image'
 import { Shield, MessageSquare, TrendingUp, CheckCircle, StarIcon } from 'lucide-react';
 import { JSX } from "react";
+import TASCBanner from './TascBanner';
+import SafteyNav from './SafteyNav';
 
   interface ImageData {
     src: string,
@@ -12,7 +14,7 @@ import { JSX } from "react";
     jsxType: string
   }
   
-  // how tasc component
+  // why tasc component
 
   const WhyTASC: React.FC = ()=> <div>
         <div className='mt-60 mb-30'>
@@ -200,9 +202,10 @@ import { JSX } from "react";
   </div>
 
 
-  // why tasc component
+  // how tasc component
 
-  const HowTASC: React.FC = ()=> <div>
+  const HowTASC: React.FC = ()=> (
+    <div>
 
       <section className="py-20 bg-white">
       <div className="max-w-6xl mx-auto px-8">
@@ -213,7 +216,7 @@ import { JSX } from "react";
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
         >
-            <h2 className="text-5xl font-bold text-teal-800 mb-8">How TASC Works?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold text-teal-800 mb-8">How TASC Works?</h2>
         </motion.div>
 
         <div className="space-y-6">
@@ -243,7 +246,9 @@ import { JSX } from "react";
       </div>
     </section>
 
-  </div>
+    </div>
+  )
+
 
     // jsx component mapping
 
@@ -260,7 +265,7 @@ import { JSX } from "react";
 
 const LandingPage: React.FC = () => {
 
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+const {router, setSelectedImage, selectedImage} = useAppContext();
 
 
 // make sure always scolled to top whenever state changes....
@@ -280,67 +285,33 @@ const LandingPage: React.FC = () => {
       }
   }
 
-    const context = useContext(AppContext);
 
-    if(!context){
-        throw new Error("Some context nedded")
-    }
-
-    const {router} =context
 
     const guideline = ()=>{
         router.push('/guidelines')
     }
 
   return (
+
     <div>
-
+      
         {/* saftey nav bar  */}
-        <nav className='fixed top-23 left-0 bg-[#fbfbfb] w-full md:py-1 md:px-60 z-50  '>
-          {/* after click navbar indicate the state name */}
-            <div className='flex py-2 gap-9 text-gray-500 text-xl'>
-              <p 
-                onClick={() => setSelectedImage(null)} 
-                className={`${selectedImage === null ? 'text-black font-semibold ' : ''} hover:text-black duration-100 cursor-pointer`}
-            >
-                Overview
-            </p>
-            <p 
-                onClick={() => setSelectedImage('WhyTASC')} 
-                className={`${selectedImage === 'WhyTASC' ? 'text-black font-semibold ' : ''} hover:text-black duration-100 cursor-pointer`}
-            >
-                Why TASC
-            </p>
-            <p 
-                onClick={() => setSelectedImage('HowTASC')} 
-                className={`${selectedImage === 'HowTASC' ? 'text-black font-semibold ' : ''} hover:text-black duration-100 cursor-pointer`}
-            >
-                How TASC
-            </p>
 
-            </div>
-        </nav>
-        {! selectedImage ? (<div className='overflow-hidden flex flex-col space-y-10 mb-20 mt-50'>
+        <SafteyNav />
 
-                <div className="relative w-full">
+
+        {! selectedImage ? (<div className='overflow-hidden space-y-10 mb-20 mt-15 md:mt-36'>
+
+
+                {/* main banner component */}
+
+                <TASCBanner/>
+
                 {/* Text on top of the image */}
-                <div className="absolute inset-0 flex flex-col justify-start items-start px-2 sm:px-4 md:px-6 lg:px-8 pt-2 sm:pt-4 md:pt-6 lg:pt-8 text-xs sm:text-sm md:text-base lg:text-lg">
-                    <h1 
-                        className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-teal-600 via-blue-600 to-purple-600 bg-clip-text text-transparent leading-snug sm:leading-tight"
-                    >
-                        Thoda Aaram Se
-                        <br />
-                        <span className="text-amber-500">Chalaiye</span>
-                    </h1>
-                    
-                    <p 
-                        className="text-base sm:text-lg md:text-xl font-semibold bg-gradient-to-r from-teal-600 via-blue-600 to-purple-600 bg-clip-text text-transparent leading-relaxed max-w-sm sm:max-w-md md:max-w-2xl text-justify mt-3 sm:mt-4"
-                    >
-                        TASC is a web application dedicated to prioritizing passenger safety, comfort, and choice in ride services. 
-                        The application empowers passengers to provide comprehensive feedback on their ride experiences, which directly 
-                        impacts driver ratings. This passenger-centric approach aims to improve overall ride quality and safety standards 
-                        across the transportation ecosystem.
-                    </p>
+                {/* <div className="relative w-full">
+                <div className="absolute inset-0 flex flex-col justify-end items-start px-2 sm:px-4 md:px-6 lg:px-8 pt-2 sm:pt-4 md:pt-6 lg:pt-8 text-xs sm:text-sm md:text-base lg:text-lg">
+                 
+                  
 
                     <motion.div className="space-y-6 sm:space-y-8 mt-4 sm:mt-6" variants={itemVariants}>
                         <motion.button 
@@ -353,26 +324,26 @@ const LandingPage: React.FC = () => {
                             Explore Guidelines
                         </motion.button>
                     </motion.div>
-                </div>
+                </div> */}
 
                 {/* Image as the background */}
-                <Image 
+                {/* <Image 
                     className="w-full h-auto object-cover" 
-                    src="/banner.jpg" 
+                    src="/banner_main.png" 
                     height={30} 
                     width={2000} 
                     alt="banner"
                 />
                 </div>
-
+ */}
 
               {/* what TASC is card section */}
 
               <section>
                 <div className="max-w-6xl mx-auto px-8">
                   <div className='text-center mb-16'>
-                    <h2 className='flex flex-col gap-5 text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-6'>Welcome to TASC — Thoda Aaram Se Chalaiye</h2>
-                    <h3 className='text-4xl font-bold text-teal-800 mb-8'>What TASC is?</h3>
+                    <h2 className='flex flex-col gap-5 text-2xl md:text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-6'>Welcome to TASC — Thoda Aaram Se Chalaiye</h2>
+                    <h3 className='text-2xl md:text-4xl font-bold text-teal-800 mb-8'>What TASC is?</h3>
                   </div>
 
                   <div className='grid md:grid-cols-3 gap-8 px-10'>
@@ -401,7 +372,7 @@ const LandingPage: React.FC = () => {
                             <item.icon className='w-6 h-- text-white' />
                           </div>
                           <h4 className='text-xl font-bold text-gray-800 mb-4'>{item.title}</h4>
-                          <p className='text-gray-600'>{item.content}</p>
+                          <p className='text-gray-600 text-justify tracking-tight'>{item.content}</p>
                         </div>
                       ))
                       
@@ -413,7 +384,7 @@ const LandingPage: React.FC = () => {
         
               <section>
                 {/* dynamic image mapping using json object with type saftey */}
-                    <div className='flex flex-col md:gap-40 justify-center items-center mt-25 mb-25'>
+                    <div className='flex flex-col md:gap-40 gap-20 justify-center items-center mt-25 mb-25'>
                     
                     {images.map((img, i)=> (
                       <Image
@@ -429,7 +400,6 @@ const LandingPage: React.FC = () => {
                     </div>
                 </section>
 
-               {/* how tasc works */}
 
   
 

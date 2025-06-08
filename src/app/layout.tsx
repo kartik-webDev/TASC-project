@@ -3,6 +3,7 @@ import "./globals.css";
 import {  AppContextProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 
 export const metadata: Metadata = {
@@ -23,7 +24,7 @@ export default function RootLayout({
           <Toaster/>
           
         {children}
-        {/* <Footer/> */}
+        <Footer/>
         </AppContextProvider>
       </body>
     </html>
