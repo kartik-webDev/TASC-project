@@ -2,6 +2,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { Router } from 'next/router';
+import Link from 'next/link';
+
 
 // Types
 interface FloatingElementProps {
@@ -191,11 +194,11 @@ const TASCBanner: React.FC = () => {
       },
     },
   };
-
+  
   return (
     <section 
       ref={ref}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-purple-600 via-indigo-600 to-teal-500"
+      className="relative min-h-screen overflow-hidden bg-gradient-to-br from-teal-600 via-blue-600 to-purple-600"
       style={{
         backgroundSize: '400% 400%',
         animation: 'gradientShift 8s ease infinite',
@@ -271,7 +274,9 @@ const TASCBanner: React.FC = () => {
             </motion.p>
             
             <motion.div variants={itemVariants}>
+              <Link href='/guidelines' >
               <motion.button
+              
                 className="group relative px-8 py-4 bg-gradient-to-r from-red-500 to-teal-500 text-white font-semibold text-lg rounded-full shadow-2xl transition-all duration-300 overflow-hidden"
                 whileHover={{ 
                   scale: 1.05,
@@ -287,6 +292,7 @@ const TASCBanner: React.FC = () => {
                   transition={{ duration: 0.5 }}
                 />
               </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 

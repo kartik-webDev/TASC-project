@@ -8,7 +8,7 @@ const SafteyNav = () => {
 
   return (
     <div>
-      <nav className={`fixed top-13 md:top-23 left-0 bg-[#fbfbfb] w-full z-40 md:py-1 md:px-60 duration-300 ${isMenuOpen ? 'z-40' : ''}`}>
+      <nav className={`fixed flex justify-center items-center top-13 md:top-23 left-0 bg-[#fbfbfb] w-full z-40 md:py-1 md:px-60 duration-300 ${isMenuOpen ? 'z-40' : ''}`}>
         {/* Navbar Links */}
         <div className='flex py-2 gap-9 text-gray-500 text-xl'>
           <p 

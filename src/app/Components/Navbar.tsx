@@ -47,21 +47,34 @@ const Navbar = () => {
 
   return (
     <div className="mb-30">
-      <nav className="fixed top-0 left-0 bg-white w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 duration-500 z-50 py-4 md:py-6">
+      <nav className="fixed top-0 left-0 bg-gradient-to-br from-teal-600 via-blue-600 to-purple-600 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 duration-500 z-50 py-4 md:py-6">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        {/* <Link href="/" className="flex items-center gap-2">
         
           <span className=" md:text-2xl bg-gradient-to-r from-yellow-500 via-yellow-300 to-amber-600 bg-clip-text text-transparent font-bold">TASC</span>
         
           
-        </Link>
+        </Link> */}
+
+          <div className="flex items-center gap-4">
+            {/* navigate to home */}
+            <Link href='/'>
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                <span className="text-xl  font-black text-white">T</span>
+              </div>
+            </Link>
+              <div>
+                <h1 className="text-xl font-black text-white tracking-tight hidden md:block">TASC</h1>
+                <p className="text-blue-100 font-medium text-sm hidden md:block">Thoda Aaram Se Chalaiye</p>
+              </div>
+          </div>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex text-xl items-center gap-4 lg:gap-18">
           {navLinks.map((link, i) => (
-            <Link key={i} href={link.path} className="group flex flex-col gap-0.5 text-black">
+            <Link key={i} href={link.path} className="group flex flex-col gap-0.5 text-white">
               {link.name}
-              <div className="bg-black h-0.5 w-0 group-hover:w-full transition-all duration-300" />
+              <div className="bg-white h-0.5 w-0 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </div>

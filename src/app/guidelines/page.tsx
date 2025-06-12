@@ -1,222 +1,236 @@
-// app/guidelines/page.tsx
-"use client"
-import React, { useContext } from 'react';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation'
-const GuidelinesPage = ()=> {
+'use client'
+import React from 'react';
+import { useRouter } from 'next/navigation';
+import { Shield, AlertTriangle, Car, UserCheck, MessageSquare, CheckCircle, XCircle, Eye, Phone, MapPin } from 'lucide-react';
 
-const router = useRouter()
+const GuidelinesPage = () => {
+  const router = useRouter();
 
-const feedbackBtn = ()=>{
-  router.push('/feedback')
-}
+  const feedbackBtn = () => {
+    router.push('/feedback');
+  };
+
+  const guidelines = [
+    {
+      id: 1,
+      title: "Getting Started with Your Ride",
+      image: "https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png",
+      icon: <UserCheck className="w-8 h-8" />,
+      color: "from-green-500 to-emerald-600",
+      bgColor: "bg-green-50",
+      points: [
+        { icon: <Eye className="w-4 h-4" />, text: "Verify vehicle and driver details" },
+        { icon: <UserCheck className="w-4 h-4" />, text: "Confirm your name before boarding" },
+        { icon: <MapPin className="w-4 h-4" />, text: "Board from curbside safely" },
+        { icon: <Shield className="w-4 h-4" />, text: "Always wear your seatbelt" },
+        { icon: <CheckCircle className="w-4 h-4" />, text: "Rate your trip afterwards" }
+      ]
+    },
+    {
+      id: 2,
+      title: "Identifying Unsafe Drivers",
+      image: "https://gpscompany.ae/wp-content/uploads/2024/12/Driver-Behavior-Monitor-1024x1024.webp",
+      icon: <AlertTriangle className="w-8 h-8" />,
+      color: "from-red-500 to-rose-600",
+      bgColor: "bg-red-50",
+      points: [
+        { icon: <XCircle className="w-4 h-4" />, text: "Rude or aggressive behavior" },
+        { icon: <AlertTriangle className="w-4 h-4" />, text: "Signs of intoxication" },
+        { icon: <UserCheck className="w-4 h-4" />, text: "Improper attire and hygiene" },
+        { icon: <Car className="w-4 h-4" />, text: "Reckless driving practices" },
+        { icon: <XCircle className="w-4 h-4" />, text: "Failure to follow protocols" }
+      ]
+    },
+    {
+      id: 3,
+      title: "Recognizing Unmaintained Vehicles",
+      image: "/man.jpg",
+      icon: <Car className="w-8 h-8" />,
+      color: "from-orange-500 to-amber-600",
+      bgColor: "bg-orange-50",
+      points: [
+        { icon: <AlertTriangle className="w-4 h-4" />, text: "Cracked windshields or broken lights" },
+        { icon: <Car className="w-4 h-4" />, text: "Unusual engine noises or smells" },
+        { icon: <XCircle className="w-4 h-4" />, text: "Stained or torn interior" },
+        { icon: <Shield className="w-4 h-4" />, text: "Missing safety features" },
+        { icon: <AlertTriangle className="w-4 h-4" />, text: "Dashboard warning lights" }
+      ]
+    },
+    {
+      id: 4,
+      title: "Making Safe Choices",
+      image: "./indian_man.jpg",
+      icon: <Shield className="w-8 h-8" />,
+      color: "from-blue-500 to-indigo-600",
+      bgColor: "bg-blue-50",
+      points: [
+        { icon: <XCircle className="w-4 h-4" />, text: "End ride if you feel unsafe" },
+        { icon: <Phone className="w-4 h-4" />, text: "Use in-app safety tools" },
+        { icon: <MapPin className="w-4 h-4" />, text: "Avoid isolated drop-offs at night" },
+        { icon: <Shield className="w-4 h-4" />, text: "Don't share personal information" },
+        { icon: <CheckCircle className="w-4 h-4" />, text: "Trust your instincts" }
+      ]
+    },
+    {
+      id: 5,
+      title: "Reporting & Feedback",
+      image: "/woman.jpeg",
+      icon: <MessageSquare className="w-8 h-8" />,
+      color: "from-purple-500 to-violet-600",
+      bgColor: "bg-purple-50",
+      points: [
+        { icon: <AlertTriangle className="w-4 h-4" />, text: "Report unsafe behavior immediately" },
+        { icon: <MessageSquare className="w-4 h-4" />, text: "Provide detailed feedback" },
+        { icon: <CheckCircle className="w-4 h-4" />, text: "Follow up on serious incidents" },
+        { icon: <Shield className="w-4 h-4" />, text: "Help protect future riders" },
+        { icon: <Phone className="w-4 h-4" />, text: "Use app reporting features" }
+      ]
+    }
+  ];
+
+  const safetyStats = [
+    { number: "99.9%", label: "Safe Rides", icon: <Shield className="w-6 h-6" /> },
+    { number: "24/7", label: "Support", icon: <Phone className="w-6 h-6" /> },
+    { number: "100%", label: "Verified Drivers", icon: <UserCheck className="w-6 h-6" /> },
+    { number: "Easy-Use", label: "Easy To use", icon: <MapPin className="w-6 h-6" /> }
+  ];
 
   return (
-    <section className="space-y-12 px-6 md:px-16 py-12">
-      <div className="text-center">
-        <h2 className="text-4xl font-bold text-teal-700">
-          Passenger Safety & Comfort Guidelines
-        </h2>
-        <p className="mt-4 text-lg text-gray-600">
-          Ensuring every ride is safe, reliable, and respectful for all passengers.
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-10 -right-10 w-72 h-72 bg-gradient-to-br from-teal-200/30 to-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-10 -left-10 w-96 h-96 bg-gradient-to-tr from-purple-200/30 to-pink-200/30 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-yellow-200/20 to-orange-200/20 rounded-full blur-3xl animate-pulse delay-500"></div>
       </div>
 
-      {/* button */}
-
-      <div className='flex  justify-center'>
-        <button onClick={feedbackBtn} className='text-white bg-black text-2xl p-3 rounded-2xl cursor-pointer'>Feedback</button>
-      </div>
-
-      {/* 1. Getting Started with Your Ride */}
-      <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="md:w-1/2">
-          <img
-            src="https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png"
-            alt="Start Ride"
-            className="rounded-lg shadow-md"
-            width={600}
-            height={400}
-          />
+      <div className="relative z-10 px-6 py-12">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-teal-500 to-blue-600 rounded-2xl shadow-2xl mb-6 transform hover:scale-110 transition-all duration-300">
+            <Shield className="w-10 h-10 text-white" />
+          </div>
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-teal-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+            Safety Guidelines
+          </h1>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Your comprehensive guide to safe, comfortable, and reliable ride experiences
+          </p>
         </div>
-        <div className="md:w-1/2">
-          <h3 className="text-2xl font-semibold text-teal-600">
-            1. Getting Started with Your Ride
-          </h3>
-          <ul className="list-disc list-inside mt-4 text-gray-700 space-y-2 text-justify">
-            <li>
-              <strong>Verify the Vehicle and Driver:</strong> Check the license plate, driver photo, and car model before getting in.
-            </li>
-            <li>
-              <strong>Confirm Your Name:</strong> Always wait for the driver to confirm your name before you board to avoid mix-ups or scams.
-            </li>
-            <li>
-              <strong>Board in a Safe Location:</strong> Enter the car from the curbside and avoid high-traffic areas if possible.
-            </li>
-            <li>
-              <strong>Use Seatbelts:</strong> Always wear your seatbelt, even for short trips.
-            </li>
-            <li>
-              <strong>Rate Your Trip:</strong> Give a rating and leave comments—it helps ensure accountability and improves future rides.
-            </li>
-          </ul>
+
+        {/* Safety Stats */}
+        <div className="max-w-4xl mx-auto mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {safetyStats.map((stat, index) => (
+              <div key={index} className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 text-center shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-600 rounded-xl mb-3 text-white">
+                  {stat.icon}
+                </div>
+                <div className="text-2xl font-bold text-gray-800 mb-1">{stat.number}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 2. Identifying Untrained or Unsafe Drivers */}
-      <div className="flex flex-col md:flex-row-reverse items-center gap-6">
-        <div className="md:w-1/2">
-          <img
-            src="https://gpscompany.ae/wp-content/uploads/2024/12/Driver-Behavior-Monitor-1024x1024.webp"
-            alt="Untrained Driver"
-            className="rounded-lg shadow-md"
-
-          />
+        {/* Feedback Button */}
+        <div className="flex justify-center mb-16">
+          <button 
+            onClick={feedbackBtn} 
+            className="group bg-gradient-to-r from-teal-600 to-blue-700 hover:from-teal-700 hover:to-blue-800 text-white text-xl px-10 py-5 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center gap-3"
+          >
+            <MessageSquare className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" />
+            Share Your Feedback
+          </button>
         </div>
-        <div className="md:w-1/2">
-          <h3 className="text-2xl font-semibold text-teal-600">
-            2. Identifying Untrained or Unsafe Drivers
-          </h3>
-            <ul className="list-disc list-inside mt-4 text-gray-700 space-y-3 text-justify">
-            <li>
-                <strong>Rude or Aggressive Behavior:</strong> Driver who yelling unnecessarily at passengers should be avoided , making sarcastic or demeaning comments, using threatening gestures, or engaging in road rage toward other drivers or pedestrians. Drivers should be respectful and calm, especially in stressful traffic situations.
-            </li>
-            <li>
-                <strong>Visible Intoxication or Substance Use:</strong> Signs such as bloodshot or glassy eyes, slurred speech, the smell of alcohol or drugs, difficulty maintaining focus, sudden mood swings, or delayed reactions are major red flags. If you suspect intoxication, end the ride immediately and report it via the app.
-            </li>
-            <li>
-                <strong>Improper Attire and Lack of Hygiene:</strong> Drivers should appear clean and professionally dressed. Warning signs include wearing sleepwear, overly revealing or inappropriate clothing, being barefoot, or having strong body odor or unclean vehicle interiors. A driver’s appearance reflects their commitment to professionalism and rider comfort.
-            </li>
-            <li>
-                <strong>Unsafe or Reckless Driving Practices:</strong> Watch for excessive speeding, abrupt braking or acceleration, failure to use signals, frequent lane weaving, ignoring traffic signs or lights, and texting or talking on the phone while driving. These habits create a dangerous environment for all road users.
-            </li>
-            <li>
-                <strong>Failure to Verify Identity or Follow App Protocols:</strong> Legitimate drivers will always confirm your name before starting the ride. Refusing to do so, taking you on an unfamiliar or unapproved route, asking for cash despite app-based payments, or pressuring you to cancel and rebook outside the app are serious concerns and should be reported.
-            </li>
-            <li>
-                <strong>Overcrowding or Unauthorized Passengers:</strong> Drivers should never allow more passengers than the vehicle’s capacity or pick up other riders during your trip without prior notice (unless it’s a carpooling ride through the app). Overcrowding is a safety violation and can make passengers uncomfortable.
-            </li>
-            <li>
-                <strong>Disregard for Rider Preferences:</strong> Ignoring requests for quiet rides, inappropriate music or videos, refusal to adjust climate settings, or engaging in unwelcome personal conversations can create discomfort. Drivers are expected to maintain a professional boundary and respect the rider’s preferences.
-            </li>
-            <li>
-                <strong>Neglecting Safety Features:</strong> Not encouraging the use of seat belts, blocking access to emergency exits, or failing to lock doors properly during travel are all signs of negligence. Drivers must ensure that all safety features in the vehicle are functional and accessible.
-            </li>
-            </ul>
 
+        {/* Guidelines Cards */}
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {guidelines.map((guideline, index) => (
+              <div 
+                key={guideline.id}
+                className={`group bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-3 transition-all duration-500 overflow-hidden border border-white/30 ${
+                  index === 2 ? 'lg:col-span-1 lg:mx-auto lg:max-w-sm' : ''
+                }`}
+                style={{
+                  animationDelay: `${index * 0.1}s`
+                }}
+              >
+                {/* Card Header */}
+                <div className={`relative h-48 ${guideline.bgColor} overflow-hidden`}>
+                  <img
+                    src={guideline.image}
+                    alt={guideline.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${guideline.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
+                  
+                  {/* Icon Overlay */}
+                  <div className={`absolute top-4 right-4 w-14 h-14 bg-gradient-to-r ${guideline.color} rounded-2xl flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-all duration-300`}>
+                    {guideline.icon}
+                  </div>
+
+                  {/* Card Number */}
+                  <div className="absolute bottom-4 left-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center font-bold text-gray-800 shadow-lg">
+                    {guideline.id}
+                  </div>
+                </div>
+
+                {/* Card Content */}
+                <div className="p-8">
+                  <h3 className="text-xl font-bold text-gray-800 mb-6 text-center group-hover:text-teal-700 transition-colors duration-300">
+                    {guideline.title}
+                  </h3>
+                  
+                  <ul className="space-y-4">
+                    {guideline.points.map((point, pointIndex) => (
+                      <li key={pointIndex} className="flex items-start group/item">
+                        <div className={`w-8 h-8 bg-gradient-to-r ${guideline.color} rounded-lg flex items-center justify-center text-white mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200`}>
+                          {point.icon}
+                        </div>
+                        <span className="text-gray-700 text-sm leading-relaxed group-hover/item:text-gray-900 transition-colors duration-200">
+                          {point.text}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Card Footer */}
+                <div className="px-8 pb-8">
+                  <div className={`w-full h-2 bg-gradient-to-r ${guideline.color} rounded-full shadow-inner`}></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 3. Recognizing Unmaintained Vehicles */}
-      <div className="flex flex-col md:flex-row items-center gap-6">
-        <div className="md:w-1/2">
-          <Image
-            src="/man.jpg"
-            alt="Unmaintained Vehicle"
-            className="rounded-lg shadow-md"
-            width={600}
-            height={400}
-          />
-        </div>
-        <div className="md:w-1/2">
-          <h3 className="text-2xl font-semibold text-teal-600">
-            3. Recognizing Unmaintained Vehicles
-          </h3>
-          <ul className="list-disc list-inside mt-4 text-gray-700 space-y-3">
-            <li>
-              <strong>Exterior Issues:</strong> Watch for cracked or shattered windshields, broken or taped-over headlights and taillights, rust patches, body dents —these often reflect poor upkeep and possible structural weaknesses.
-            </li>
-            <li>
-              <strong>Mechanical Red Flags:</strong> Be cautious if the vehicle emits unusual engine noises (such as grinding, rattling, or high-pitched whining), visible exhaust smoke, or strong smells of gasoline, oil, or burning rubber. These may point to serious underlying issues.
-            </li>
-            <li>
-              <strong>Interior Neglect:</strong> Warning signs include stained or torn upholstery, persistent foul odors (such as mold, smoke, or chemicals), broken seat adjustments, cluttered footwells, and loose interior panels—all of which may indicate general neglect.
-            </li>
-            <li>
-              <strong>Safety Warnings:</strong> Look for missing seatbelts, damaged airbags, or improperly secured child seats. If dashboard lights like the check engine, ABS, airbag, or tire pressure warning are illuminated, these may suggest unresolved safety or mechanical problems.
-            </li>
-            <li>
-              <strong>Ride Comfort Problems:</strong> If the car bounces excessively, pulls to one side, or feels unstable around corners, it may suffer from suspension, alignment, or tire issues. Struggling doors or windows that jam or won’t seal properly are also concerning.
-            </li>
-          </ul>
 
-        </div>
-      </div>
-
-      {/* 4. Making Safe Choices */}
-      <div className="flex flex-col md:flex-row-reverse items-center gap-6">
-        <div className="md:w-1/2">
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSO8jA7T_1TiUwBKUVuRuQRoKV-tCjVc75p_gGjx_NebC_Iaf14lF5L0lm8jA6V6DjKpZI&usqp=CAU"
-            alt="Safe Choices"
-            className="rounded-lg shadow-md"
-            width={600}
-            height={400}
-          />
-        </div>
-        <div className="md:w-1/2">
-          <h3 className="text-3xl font-semibold text-teal-600">
-            4. Making Safe Choices
-          </h3>
-          <ul className="list-disc list-inside mt-4 text-gray-700 space-y-2 text-justify">
-            <li>
-              <strong>End the Ride if Necessary:</strong> 
-              If at any point you feel uncomfortable or unsafe, calmly ask the driver to stop at a nearby <b>well-lit and public location</b> such as a store, petrol pump, or bus stop. Trust your instincts—your safety always comes first.
-            </li>
-            <li>
-              <strong>Use In-App Safety Tools:</strong> 
-              Most ride apps include emergency buttons, live location sharing, and contact features. Use them to alert friends or family, or call emergency services quickly if needed. Familiarize yourself with these tools before you start the ride.
-            </li>
-            <li>
-              <strong>Avoid Isolated Drop-Offs:</strong> 
-              Especially during <b>night-time rides</b>, plan your drop-off at a <b>populated, well-lit area</b>. If your home is in a quiet lane, consider getting off at a nearby main road and walking a short distance with someone or under street lights.
-            </li>
-            <li>
-              <strong>Don’t Share Personal Information:</strong> 
-              While being polite is good, <b>avoid sharing sensitive details</b> like your phone number, full name, or address. If asked, simply say, “I prefer to keep personal info private for safety.”
-            </li>
-          </ul>
-
+        {/* Bottom CTA */}
+        <div className="mt-16 text-center">
+          <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-10 max-w-3xl mx-auto border border-white/30">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-teal-500 to-blue-600 rounded-2xl mb-6">
+              <Shield className="w-8 h-8 text-white" />
+            </div>
+            <h4 className="text-3xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-4">
+              Stay Safe, Stay Informed
+            </h4>
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              Your safety is our highest priority. Always trust your instincts and don't hesitate to report any concerns.
+            </p>
+            <button 
+              onClick={feedbackBtn}
+              className="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-3 mx-auto"
+            >
+              <AlertTriangle className="w-5 h-5" />
+              Report an Issue
+            </button>
+          </div>
         </div>
       </div>
-
-      {/* 5. Reporting and Feedback */}
-      <div className="flex flex-col md:flex-row items-center gap-6 mt-20">
-        <div className="md:w-1/2">
-          <img
-            src="https://thumbs.dreamstime.com/b/woman-ordering-taxi-mobile-app-night-young-woman-ordering-taxi-mobile-app-city-street-night-351838061.jpg"
-            alt="Reporting"
-            className="rounded-lg shadow-md"
-            width={600}
-            height={400}
-          />
-        </div>
-        <div className="md:w-1/2">
-          <h3 className="text-3xl font-semibold text-teal-600">
-            5. Reporting & Feedback
-          </h3>
-<ul className="list-disc list-inside mt-4 text-gray-700 space-y-2">
-  <li>
-    <strong>Report Unsafe Behavior:</strong>  
-    If a driver behaves aggressively, drives recklessly, or acts inappropriately, please report it directly through the app. Your feedback helps us take action against such behavior and protect future riders.
-  </li>
-  <li>
-    <strong>Detailed Feedback Helps:</strong>  
-    When reporting an issue, be as specific as possible—mention what happened, where, and when. The more details you provide, the better we can investigate and respond appropriately.
-  </li>
-
-  <li>
-    <strong>Follow Up if Needed:</strong>  
-    For serious incidents, don’t hesitate to follow up on your report. We’re committed to taking every concern seriously and will ensure your case is addressed properly.
-  </li>
-</ul>
-
-        </div>
-      </div>
-
-
-    </section>
+    </div>
   );
-}
+};
 
-export default GuidelinesPage
+export default GuidelinesPage;
