@@ -4,6 +4,7 @@ import {  AppContextProvider } from "@/context/AppContext";
 import { Toaster } from "react-hot-toast";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import AuthProvider from "@/context/AuthProvider";
 
 
 export const metadata: Metadata = {
@@ -18,8 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <AuthProvider>
       <body>
-        <AppContextProvider>
+        <AppContextProvider>z
           <Navbar />
           <Toaster/>
           
@@ -27,6 +29,7 @@ export default function RootLayout({
         <Footer/>
         </AppContextProvider>
       </body>
+      </AuthProvider>
     </html>
   );
 }

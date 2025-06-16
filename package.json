@@ -11,6 +11,7 @@
     "db:migrate": "tsx ./src/db/migrate.ts"
   },
   "dependencies": {
+    "@auth/drizzle-adapter": "^1.9.1",
     "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.1",
     "@yudiel/react-qr-scanner": "^2.3.1",
