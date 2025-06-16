@@ -27,10 +27,10 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
           >
             <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-12 shadow-xl border border-purple-200">
               <div className="flex items-center gap-4 mb-12">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl flex items-center justify-center">
+                <div className="w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-2xl flex items-center justify-center">
                   <Target className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-4xl font-bold text-purple-600">Meaningful Impact</h2>
+                <h2 className="text-4xl font-bold text-teal-600">Meaningful Impact</h2>
               </div>
 
               {/* Stats Grid */}
@@ -46,9 +46,9 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-2xl p-6 text-center shadow-lg border border-purple-100"
+                    className="bg-white rounded-2xl p-6 text-center shadow-lg border border-purple-800"
                   >
-                    <stat.icon className="w-8 h-8 text-purple-500 mx-auto mb-3" />
+                    <stat.icon className="w-8 h-8 text-blue-500 mx-auto mb-3" />
                     <div className="text-3xl font-bold text-gray-800 mb-1">{stat.value}</div>
                     <div className="text-sm text-gray-600 font-medium">{stat.change}</div>
                     <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
@@ -91,56 +91,7 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Toolti
               </div>
 
               {/* Key Outcomes */}
-              <div className="mt-12 grid md:grid-cols-2 gap-8">
-                {[
-                  {
-                    title: "For Passengers",
-                    outcomes: [
-                      "Safer, more comfortable rides",
-                      "Voice that creates real change",
-                      "Transparent feedback process",
-                      "Community-driven improvements"
-                    ],
-                    color: "blue"
-                  },
-                  {
-                    title: "For Drivers",
-                    outcomes: [
-                      "Recognition for excellent service",
-                      "Constructive feedback for improvement",
-                      "Protected from false accusations",
-                      "Career development opportunities"
-                    ],
-                    color: "green"
-                  }
-                ].map((section, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 + index * 0.2 }}
-                    className={`bg-gradient-to-br ${
-                      section.color === 'blue' ? 'from-blue-50 to-indigo-50 border-blue-200' : 'from-green-50 to-emerald-50 border-green-200'
-                    } rounded-2xl p-6 border`}
-                  >
-                    <h3 className={`text-xl font-bold mb-4 ${
-                      section.color === 'blue' ? 'text-blue-600' : 'text-green-600'
-                    }`}>
-                      {section.title}
-                    </h3>
-                    <div className="space-y-3">
-                      {section.outcomes.map((outcome, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <Star className={`w-4 h-4 ${
-                            section.color === 'blue' ? 'text-blue-500' : 'text-green-500'
-                          }`} />
-                          <span className="text-gray-700">{outcome}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+             
             </div>
 </motion.div>
     )
