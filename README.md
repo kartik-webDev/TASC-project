@@ -5,10 +5,10 @@
 - Version: 1.0
 
 # 2. Team Members
-- Name: Kartik, Shivani
+- Name: Kartik
 - Role/Responsibilities: 
     - Kartik: Full Stack 
-    - Shivani: UI/UX, Layout
+   
 
 # 3. Summary 
 
