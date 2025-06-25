@@ -1,27 +1,18 @@
-// db.ts
-import { drizzle } from 'drizzle-orm/neon-http';
-import { neon } from '@neondatabase/serverless';
-import * as schema from './schema';
-import { desc, eq } from 'drizzle-orm';
+import {drizzle} from "drizzle-orm/neon-http"
+import { neon } from "@neondatabase/serverless"
 import { config } from "dotenv"
 import path from "path"
+import * as schema from './schema';
+import { desc, eq } from "drizzle-orm"
 
 config({path: ".env.local"})
+ 
+const sql = neon(process.env.DB_URL!)
 
-// Environment variables
-const DB_URL = process.env.DB_URL!;
+// logger
+//  const db = drizzle(sql, {logger: true})
+const db = drizzle(sql, {schema})
 
-if (!DB_URL) {
-  throw new Error('DATABASE_URL environment variable is required');
-}
-
-// Create neon client
-const sql = neon(DB_URL);
-
-// Create drizzle instance
-const db = drizzle(sql, { schema });
-
-// Helper functions for feedback operations
 export class FeedbackService {
   static async createFeedback(data: {
     vehicleNumber: string;
