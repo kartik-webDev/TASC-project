@@ -1,17 +1,23 @@
-import {drizzle} from "drizzle-orm/neon-http"
-import { neon } from "@neondatabase/serverless"
-import { config } from "dotenv"
-import path from "path"
+import { drizzle } from 'drizzle-orm/neon-http';
+import { neon } from '@neondatabase/serverless';
 import * as schema from './schema';
-import { desc, eq } from "drizzle-orm"
+import { config } from 'dotenv';
+import { desc, eq } from 'drizzle-orm';
 
-config({path: ".env.local"})
- 
-const sql = neon(process.env.DB_URL!)
+// Load env vars from .env.local (useful for local dev)
+config({ path: '.env.local' });
 
-// logger
-//  const db = drizzle(sql, {logger: true})
-const db = drizzle(sql, {schema})
+const connectionString = process.env.DB_URL;
+
+if (!connectionString) {
+  throw new Error('❌ DB_URL is not defined. Set it in your Vercel dashboard or .env.local');
+}
+
+// Initialize Neon HTTP client
+const sql = neon(connectionString);
+
+// Drizzle client with schema (remove schema if not using typed tables)
+const db = drizzle(sql, { schema });
 
 export class FeedbackService {
   static async createFeedback(data: {
@@ -95,4 +101,5 @@ export class FeedbackService {
   }
 }
 
-export default db
+
+export default db;
