@@ -11,7 +11,7 @@ const GuidelinesPage = () => {
   useEffect(()=>{
 
     const getData = async () =>{
-      const res = await fetch(" http://localhost:3000/api/guidelines")
+      const res = await fetch("/api/guidelines");
       const result = await res.json()
       setData(result)
       console.log(result)

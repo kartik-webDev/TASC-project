@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Camera, Check, X, Star, ChevronRight, QrCode, Send, 
   Shield, Car, User, Heart, Clock, ThumbsUp, ThumbsDown, 
-  CheckCircle2, Volume2,SendHorizonal,
+  CheckCircle2, Volume2,SendHorizonal, ClipboardCheck,
   AlertTriangle
 } from 'lucide-react';
 import type { JSX } from 'react';
@@ -132,7 +132,7 @@ export default function TASCApp(): JSX.Element {
     useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch(" http://localhost:3000/api/config");
+        const response = await fetch("api/config");
         if (!response.ok) {
           throw new Error('Failed to fetch configuration');
         }
