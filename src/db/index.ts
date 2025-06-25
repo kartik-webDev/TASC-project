@@ -14,7 +14,7 @@ if (!connectionString) {
 }
 
 // Initialize Neon HTTP client
-const sql = neon(connectionString);
+const sql = neon("postgresql://neondb_owner:npg_mYrvbVMg94kN@ep-late-flower-a1pbokim-pooler.ap-southeast-1.aws.neon.tech/tasc_database?sslmode=require");
 
 // Drizzle client with schema (remove schema if not using typed tables)
 const db = drizzle(sql, { schema });
