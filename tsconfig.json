@@ -42,5 +42,9 @@
   ],
   "exclude": [
     "node_modules"
-  ]
+  ],
+      "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+
 }

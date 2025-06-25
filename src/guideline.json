@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "title": "Getting Started with Your Ride",
+    "image": "https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png",
+    "color": "from-green-500 to-emerald-600",
+    "bgColor": "bg-green-50",
+    "points": [
+      { "text": "Verify vehicle and driver details" },
+      { "text": "Confirm your name before boarding" },
+      { "text": "Board from curbside safely" },
+      { "text": "Always wear your seatbelt" },
+      { "text": "Rate your trip afterwards" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Identifying Unsafe Drivers",
+    "image": "https://gpscompany.ae/wp-content/uploads/2024/12/Driver-Behavior-Monitor-1024x1024.webp",
+    "color": "from-red-500 to-rose-600",
+    "bgColor": "bg-red-50",
+    "points": [
+      { "text": "Rude or aggressive behavior" },
+      { "text": "Signs of intoxication" },
+      { "text": "Improper attire and hygiene" },
+      { "text": "Reckless driving practices" },
+      { "text": "Failure to follow protocols" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Recognizing Unmaintained Vehicles",
+    "image": "/man.jpg",
+    "color": "from-orange-500 to-amber-600",
+    "bgColor": "bg-orange-50",
+    "points": [
+      { "text": "Cracked windshields or broken lights" },
+      { "text": "Unusual engine noises or smells" },
+      { "text": "Stained or torn interior" },
+      { "text": "Missing safety features" },
+      { "text": "Dashboard warning lights" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Making Safe Choices",
+    "image": "./indian_man.jpg",
+    "color": "from-blue-500 to-indigo-600",
+    "bgColor": "bg-blue-50",
+    "points": [
+      { "text": "End ride if you feel unsafe" },
+      { "text": "Use in-app safety tools" },
+      { "text": "Avoid isolated drop-offs at night" },
+      { "text": "Don't share personal information" },
+      { "text": "Trust your instincts" }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Reporting & Feedback",
+    "image": "/woman.jpeg",
+    "color": "from-purple-500 to-violet-600",
+    "bgColor": "bg-purple-50",
+    "points": [
+      { "text": "Report unsafe behavior immediately" },
+      { "text": "Provide detailed feedback" },
+      { "text": "Follow up on serious incidents" },
+      { "text": "Help protect future riders" },
+      { "text": "Use app reporting features" }
+    ]
+  }
+]

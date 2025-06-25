@@ -5,9 +5,12 @@ import { auth, provider } from "../Config/firebaseConfig";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import toast from "react-hot-toast";
 import { AppContext } from "@/context/AppContext";
+// next auth sign in
 import { signIn } from "next-auth/react"
 
 const LoginPage = () => {
+
+  // react context
   const context = useContext(AppContext);
   if (!context) {
     throw new Error("LoginPage must be used within an AppContextProvider");
@@ -19,18 +22,18 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const GoogleSignUp = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("User Info:", result.user);
-      toast.success(`Welcome, ${result.user.displayName || "User"}!`);
-      setIsLoginFormOpen(false);
-    } catch (error) {
-      console.error("Error signing in:", error);
-      toast.error("Login failed. Try again!");
-    }
-  };
+  // const GoogleSignUp = async (e: SyntheticEvent) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await signInWithPopup(auth, provider);
+  //     console.log("User Info:", result.user);
+  //     toast.success(`Welcome, ${result.user.displayName || "User"}!`);
+  //     setIsLoginFormOpen(false);
+  //   } catch (error) {
+  //     console.error("Error signing in:", error);
+  //     toast.error("Login failed. Try again!");
+  //   }
+  // };
 
   const onSubmitHandler = async (event: SyntheticEvent) => {
     event.preventDefault();

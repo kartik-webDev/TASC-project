@@ -1,92 +1,106 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Shield, AlertTriangle, Car, UserCheck, MessageSquare, CheckCircle, XCircle, Eye, Phone, MapPin } from 'lucide-react';
 
+
 const GuidelinesPage = () => {
+
+  const [data, setData] = useState<Guideline[]>([])
+
+  useEffect(()=>{
+
+    const getData = async () =>{
+      const res = await fetch(" http://localhost:3000/api/guidelines")
+      const result = await res.json()
+      setData(result)
+      console.log(result)
+    }
+      getData()    
+  },[])
   const router = useRouter();
 
   const feedbackBtn = () => {
     router.push('/feedback');
   };
 
-  const guidelines = [
-    {
-      id: 1,
-      title: "Getting Started with Your Ride",
-      image: "https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png",
-      icon: <UserCheck className="w-8 h-8" />,
-      color: "from-green-500 to-emerald-600",
-      bgColor: "bg-green-50",
-      points: [
-        { icon: <Eye className="w-4 h-4" />, text: "Verify vehicle and driver details" },
-        { icon: <UserCheck className="w-4 h-4" />, text: "Confirm your name before boarding" },
-        { icon: <MapPin className="w-4 h-4" />, text: "Board from curbside safely" },
-        { icon: <Shield className="w-4 h-4" />, text: "Always wear your seatbelt" },
-        { icon: <CheckCircle className="w-4 h-4" />, text: "Rate your trip afterwards" }
-      ]
-    },
-    {
-      id: 2,
-      title: "Identifying Unsafe Drivers",
-      image: "https://gpscompany.ae/wp-content/uploads/2024/12/Driver-Behavior-Monitor-1024x1024.webp",
-      icon: <AlertTriangle className="w-8 h-8" />,
-      color: "from-red-500 to-rose-600",
-      bgColor: "bg-red-50",
-      points: [
-        { icon: <XCircle className="w-4 h-4" />, text: "Rude or aggressive behavior" },
-        { icon: <AlertTriangle className="w-4 h-4" />, text: "Signs of intoxication" },
-        { icon: <UserCheck className="w-4 h-4" />, text: "Improper attire and hygiene" },
-        { icon: <Car className="w-4 h-4" />, text: "Reckless driving practices" },
-        { icon: <XCircle className="w-4 h-4" />, text: "Failure to follow protocols" }
-      ]
-    },
-    {
-      id: 3,
-      title: "Recognizing Unmaintained Vehicles",
-      image: "/man.jpg",
-      icon: <Car className="w-8 h-8" />,
-      color: "from-orange-500 to-amber-600",
-      bgColor: "bg-orange-50",
-      points: [
-        { icon: <AlertTriangle className="w-4 h-4" />, text: "Cracked windshields or broken lights" },
-        { icon: <Car className="w-4 h-4" />, text: "Unusual engine noises or smells" },
-        { icon: <XCircle className="w-4 h-4" />, text: "Stained or torn interior" },
-        { icon: <Shield className="w-4 h-4" />, text: "Missing safety features" },
-        { icon: <AlertTriangle className="w-4 h-4" />, text: "Dashboard warning lights" }
-      ]
-    },
-    {
-      id: 4,
-      title: "Making Safe Choices",
-      image: "./indian_man.jpg",
-      icon: <Shield className="w-8 h-8" />,
-      color: "from-blue-500 to-indigo-600",
-      bgColor: "bg-blue-50",
-      points: [
-        { icon: <XCircle className="w-4 h-4" />, text: "End ride if you feel unsafe" },
-        { icon: <Phone className="w-4 h-4" />, text: "Use in-app safety tools" },
-        { icon: <MapPin className="w-4 h-4" />, text: "Avoid isolated drop-offs at night" },
-        { icon: <Shield className="w-4 h-4" />, text: "Don't share personal information" },
-        { icon: <CheckCircle className="w-4 h-4" />, text: "Trust your instincts" }
-      ]
-    },
-    {
-      id: 5,
-      title: "Reporting & Feedback",
-      image: "/woman.jpeg",
-      icon: <MessageSquare className="w-8 h-8" />,
-      color: "from-purple-500 to-violet-600",
-      bgColor: "bg-purple-50",
-      points: [
-        { icon: <AlertTriangle className="w-4 h-4" />, text: "Report unsafe behavior immediately" },
-        { icon: <MessageSquare className="w-4 h-4" />, text: "Provide detailed feedback" },
-        { icon: <CheckCircle className="w-4 h-4" />, text: "Follow up on serious incidents" },
-        { icon: <Shield className="w-4 h-4" />, text: "Help protect future riders" },
-        { icon: <Phone className="w-4 h-4" />, text: "Use app reporting features" }
-      ]
-    }
-  ];
+  // const guidelines = [
+  //   {
+  //     id: 1,
+  //     title: "Getting Started with Your Ride",
+  //     image: "https://orangecitycabs.com/wp-content/uploads/2024/04/airport_img_1.png",
+  //     icon: <UserCheck className="w-8 h-8" />,
+  //     color: "from-green-500 to-emerald-600",
+  //     bgColor: "bg-green-50",
+  //     points: [
+  //       { icon: <Eye className="w-4 h-4" />, text: "Verify vehicle and driver details" },
+  //       { icon: <UserCheck className="w-4 h-4" />, text: "Confirm your name before boarding" },
+  //       { icon: <MapPin className="w-4 h-4" />, text: "Board from curbside safely" },
+  //       { icon: <Shield className="w-4 h-4" />, text: "Always wear your seatbelt" },
+  //       { icon: <CheckCircle className="w-4 h-4" />, text: "Rate your trip afterwards" }
+  //     ]
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Identifying Unsafe Drivers",
+  //     image: "https://gpscompany.ae/wp-content/uploads/2024/12/Driver-Behavior-Monitor-1024x1024.webp",
+  //     icon: <AlertTriangle className="w-8 h-8" />,
+  //     color: "from-red-500 to-rose-600",
+  //     bgColor: "bg-red-50",
+  //     points: [
+  //       { icon: <XCircle className="w-4 h-4" />, text: "Rude or aggressive behavior" },
+  //       { icon: <AlertTriangle className="w-4 h-4" />, text: "Signs of intoxication" },
+  //       { icon: <UserCheck className="w-4 h-4" />, text: "Improper attire and hygiene" },
+  //       { icon: <Car className="w-4 h-4" />, text: "Reckless driving practices" },
+  //       { icon: <XCircle className="w-4 h-4" />, text: "Failure to follow protocols" }
+  //     ]
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Recognizing Unmaintained Vehicles",
+  //     image: "/man.jpg",
+  //     icon: <Car className="w-8 h-8" />,
+  //     color: "from-orange-500 to-amber-600",
+  //     bgColor: "bg-orange-50",
+  //     points: [
+  //       { icon: <AlertTriangle className="w-4 h-4" />, text: "Cracked windshields or broken lights" },
+  //       { icon: <Car className="w-4 h-4" />, text: "Unusual engine noises or smells" },
+  //       { icon: <XCircle className="w-4 h-4" />, text: "Stained or torn interior" },
+  //       { icon: <Shield className="w-4 h-4" />, text: "Missing safety features" },
+  //       { icon: <AlertTriangle className="w-4 h-4" />, text: "Dashboard warning lights" }
+  //     ]
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Making Safe Choices",
+  //     image: "./indian_man.jpg",
+  //     icon: <Shield className="w-8 h-8" />,
+  //     color: "from-blue-500 to-indigo-600",
+  //     bgColor: "bg-blue-50",
+  //     points: [
+  //       { icon: <XCircle className="w-4 h-4" />, text: "End ride if you feel unsafe" },
+  //       { icon: <Phone className="w-4 h-4" />, text: "Use in-app safety tools" },
+  //       { icon: <MapPin className="w-4 h-4" />, text: "Avoid isolated drop-offs at night" },
+  //       { icon: <Shield className="w-4 h-4" />, text: "Don't share personal information" },
+  //       { icon: <CheckCircle className="w-4 h-4" />, text: "Trust your instincts" }
+  //     ]
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Reporting & Feedback",
+  //     image: "/woman.jpeg",
+  //     icon: <MessageSquare className="w-8 h-8" />,
+  //     color: "from-purple-500 to-violet-600",
+  //     bgColor: "bg-purple-50",
+  //     points: [
+  //       { icon: <AlertTriangle className="w-4 h-4" />, text: "Report unsafe behavior immediately" },
+  //       { icon: <MessageSquare className="w-4 h-4" />, text: "Provide detailed feedback" },
+  //       { icon: <CheckCircle className="w-4 h-4" />, text: "Follow up on serious incidents" },
+  //       { icon: <Shield className="w-4 h-4" />, text: "Help protect future riders" },
+  //       { icon: <Phone className="w-4 h-4" />, text: "Use app reporting features" }
+  //     ]
+  //   }
+  // ];
 
   const safetyStats = [
     { number: "99.9%", label: "Safe Rides", icon: <Shield className="w-6 h-6" /> },
@@ -147,7 +161,7 @@ const GuidelinesPage = () => {
         {/* Guidelines Cards */}
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {guidelines.map((guideline, index) => (
+            {data.map((guideline, index) => (
               <div 
                 key={guideline.id}
                 className={`group bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-3 transition-all duration-500 overflow-hidden border border-white/30 ${
@@ -158,7 +172,7 @@ const GuidelinesPage = () => {
                 }}
               >
                 {/* Card Header */}
-                <div className={`relative h-48 ${guideline.bgColor} overflow-hidden`}>
+                <div className={`relative h-48 ${guideline.color} overflow-hidden`}>
                   <img
                     src={guideline.image}
                     alt={guideline.title}
@@ -167,9 +181,9 @@ const GuidelinesPage = () => {
                   <div className={`absolute inset-0 bg-gradient-to-t ${guideline.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}></div>
                   
                   {/* Icon Overlay */}
-                  <div className={`absolute top-4 right-4 w-14 h-14 bg-gradient-to-r ${guideline.color} rounded-2xl flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-all duration-300`}>
+                  {/* <div className={`absolute top-4 right-4 w-14 h-14 bg-gradient-to-r ${guideline.color} rounded-2xl flex items-center justify-center text-white shadow-lg transform group-hover:scale-110 transition-all duration-300`}>
                     {guideline.icon}
-                  </div>
+                  </div> */}
 
                   {/* Card Number */}
                   <div className="absolute bottom-4 left-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center font-bold text-gray-800 shadow-lg">
@@ -186,9 +200,9 @@ const GuidelinesPage = () => {
                   <ul className="space-y-4">
                     {guideline.points.map((point, pointIndex) => (
                       <li key={pointIndex} className="flex items-start group/item">
-                        <div className={`w-8 h-8 bg-gradient-to-r ${guideline.color} rounded-lg flex items-center justify-center text-white mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200`}>
+                        {/* <div className={`w-8 h-8 bg-gradient-to-r ${guideline.color} rounded-lg flex items-center justify-center text-white mr-3 flex-shrink-0 group-hover/item:scale-110 transition-transform duration-200`}>
                           {point.icon}
-                        </div>
+                        </div> */}
                         <span className="text-gray-700 text-sm leading-relaxed group-hover/item:text-gray-900 transition-colors duration-200">
                           {point.text}
                         </span>

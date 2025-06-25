@@ -1,0 +1,144 @@
+{
+
+  "steps": [
+    { "id": 1, "name": "Vehicle Info", "icon": "Car" },
+    { "id": 2, "name": "Feedback", "icon": "Star" },
+    { "id": 3, "name": "Additional Details", "icon": "Edit" },
+    { "id": 4, "name": "Submit", "icon": "Send" }
+  ],
+  "feedbackCategories": [
+    {
+      "id": "safety",
+      "name": "Safety",
+      "icon": "shield",
+      "color": "blue",
+      "positive": [
+        "Professional driving",
+        "Follows traffic rules",
+        "Safe driving practices",
+        "Proper use of indicators",
+        "Maintains safe distance",
+        "Respects speed limits",
+        "No phone usage while driving",
+        "Seatbelt compliance"
+      ],
+      "negative": [
+        "Rash driving",
+        "Unsafe driving",
+        "Using phone while driving",
+        "Driving under influence",
+        "Not following traffic rules",
+        "Over-speeding",
+        "Improper lane changes",
+        "Ignoring traffic signals"
+      ]
+    },
+    {
+      "id": "vehicle",
+      "name": "Vehicle",
+      "icon": "car",
+      "color": "green",
+      "positive": [
+       "Clean vehicle", "Comfortable seats",
+       "Good shock absorbers",
+        "Excellent cleanliness",
+        "Perfect AC/ventilation",
+        "All safety features working",
+        "Well-maintained interior",
+        "Pleasant vehicle condition"
+      ],
+      "negative": [
+        "Poor vehicle condition",
+        "Uncomfortable seating",
+        "Poor shock absorbers",
+        "Cleanliness issues",
+        "AC/ventilation problems",
+        "Seatbelt functionality",
+        "Door/window functionality",
+        "Vehicle odor", "Windshield broken"
+      ]
+    },
+    {
+      "id": "behavior",
+      "name": "Behavior",
+      "icon": "user",
+      "color": "purple",
+      "positive": [
+        "Courteous behavior",
+        "Polite communication",
+        "Respectful interaction",
+        "Professional attitude",
+        "Helpful with directions",
+        "Respects privacy",
+        "No smoking",
+        "Appropriate conversation",
+        "Patient driving"
+      ],
+      "negative": [
+        "Rude communication",
+        "Unnecessary arguments",
+        "Inappropriate comments",
+        "Unwanted conversation",
+        "Refusal to follow route preferences",
+        "Pressuring for tips",
+        "Smoking in vehicle",
+        "Name calling",
+        "Spitting on road"
+      ]
+    },
+    {
+      "id": "comfort",
+      "name": "Noise",
+      "icon": "volume2",
+      "color": "pink",
+      "positive": [
+       "Appropriate music volume",
+        "Minimal honking", 
+        "Quiet vehicle operation",
+        "Pleasant audio environment",
+         "Respectful phone usage", "Comfortable noise levels"
+      ],
+      "negative": [
+       "Excessive honking", "Loud music",
+        "Distracting conversations (phone)",
+        "Vehicle noise issues", 
+        "Disturbing sounds", "Too much talking"
+      ]
+    },
+    {
+      "id": "service",
+      "name": "Ride Experience",
+      "icon": "send",
+      "color": "orange",
+      "positive": [
+        "Good navigation skills",
+        "Comfortable ride", "Punctuality",
+        "Smooth driving style",
+        "Efficient route selection",
+        "Fair pricing", "Timely arrival",
+        "Professional service"
+      ],
+      "negative": [
+        "Overcharging", "Taking longer routes",
+        "Abrupt stops and starts","Refusing to use meter/app pricing",
+        "Ride cancellation after accepting",
+        "Delay in arrival", "Uncomfortable driving style","Jumping on bumps"
+      ]
+    }
+  ],
+  "ui": {
+    "colors": {
+      "primary": "blue-600",
+      "secondary": "gray-600",
+      "success": "green-600",
+      "danger": "red-600",
+      "warning": "orange-600",
+      "info": "blue-500"
+    },
+    "messages": {
+      "qrScanning": "Scanning QR Code...",
+      "submitSuccess": "Feedback submitted successfully. Thank you for making rides safer!",
+      "reviewThankYou": "Thank you for your feedback! Your contribution helps improve passenger safety and ride quality for everyone."
+    }
+  }
+}
