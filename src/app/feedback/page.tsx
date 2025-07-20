@@ -125,6 +125,33 @@ export default function TASCApp(): JSX.Element {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [config, setConfig] = useState<AppConfig | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
+
+
+const [selectedPhotos, setSelectedPhotos] = useState<File[]>([]);
+
+const handleFileSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const files = Array.from(e.target.files || []);
+  const total = selectedPhotos.length + files.length;
+
+  if (total > 5) {
+    alert("You can only select up to 5 images.");
+    return;
+  }
+
+  setSelectedPhotos([...selectedPhotos, ...files]);
+};
+
+const removePhoto = (index: number) => {
+  const updated = [...selectedPhotos];
+  updated.splice(index, 1);
+  setSelectedPhotos(updated);
+};
+
+  // 
+
+  const photoCount = selectedPhotos.length;
   
 
   //  calling api to map the Data on frontend
@@ -157,6 +184,12 @@ export default function TASCApp(): JSX.Element {
 
     fetchConfig();
   }, []);
+
+
+  // 
+
+
+  
 
   // function for select & deselect review button
 
@@ -227,7 +260,7 @@ export default function TASCApp(): JSX.Element {
     setFeedbackData({});
     setActiveFeedbackCategory(null);
     setAdditionalComments('');
-    setPhotoTaken(false);
+    setSelectedPhotos([]);
   };
 
   const nextStep = () => {
@@ -454,7 +487,7 @@ export default function TASCApp(): JSX.Element {
 
   //  main UI
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 ">
       
       <div className="max-w-6xl mx-auto px-6 py-8">
        
@@ -545,16 +578,16 @@ export default function TASCApp(): JSX.Element {
                       <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-6">
                         <div className="flex items-center gap-3">
                           <CheckCircle2 className="text-green-500" size={20} />
-                          <span className="text-green-700 font-medium">Vehicle number confirmed: {vehicleNumber}</span>
+                          <span className="text-green-700 lg:font-medium text-sm">Vehicle number confirmed: {vehicleNumber}</span>
                         </div>
                       </div>
                     )}
                   </div>
                 )}
                 
-                <div className="flex justify-end mt-8">
+                <div className="flex lg:justify-end justify-center mt-8">
                   <button
-                    className="px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 text-lg"
+                    className="lg:px-8 lg:py-4 px-4 py-2  bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white rounded-2xl font-medium disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 text-lg"
                     onClick={nextStep}
                     disabled={!vehicleNumber}
                   >
@@ -614,25 +647,33 @@ export default function TASCApp(): JSX.Element {
               )}
               {/* summary stats */}
 
-              <div className="grid grid-cols-2 gap-6 mb-8 mt-10">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-6 mb-8 mt-10">
 
-                <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-3xl border-2 border-green-200">
-                  <div className="flex items-center gap-3 mb-2">
-                    <Heart className="text-green-500" size={24} />
-                    <h3 className="font-bold text-lg text-green-700">Positive Points</h3>
+               <div className="bg-gradient-to-br from-green-50 to-emerald-100 p-6 rounded-3xl border-2 border-green-200">
+
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-2">
+                      <Heart className="text-green-500" size={24} />
+                      <h3 className="font-bold text-base text-green-700">Positive Points</h3>
+                    </div>
+                    <span className="text-xl font-black text-green-600">{getTotalPositiveCount()}</span>
                   </div>
-                  <p className="text-3xl font-black text-green-600">{getTotalPositiveCount()}</p>
                 </div>
+
+              
 
                 <div className="bg-gradient-to-br from-red-50 to-rose-100 p-6 rounded-3xl border-2 border-red-200">
-                  <div className="flex items-center gap-3 mb-2">
-                    <AlertTriangle className="text-red-500" size={24} />
-                    <h3 className="font-bold text-lg text-red-700">Issues Reported</h3>
-                  </div>
-                  <p className="text-3xl font-black text-red-600">{getTotalNegativeCount()}</p>
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-2">
+                      <AlertTriangle className="text-red-500" size={24} />
+                      <h3 className="font-bold text-base text-red-700">Issues Reported</h3>
+                    </div>
+                    <p className="text-xl font-black text-red-600">{getTotalNegativeCount()}</p>
                 </div>
               </div>
-              
+
+              </div>
+
               <div className="flex justify-between mt-8">
                 <button
                   className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg"
@@ -656,29 +697,63 @@ export default function TASCApp(): JSX.Element {
               
               <div className="mb-6">
                 <label className="block text-gray-700 mb-2">Add Photos (Optional)</label>
-                {!photoTaken ? (
-                  <button 
-                    className="w-full border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50"
-                    onClick={() => setPhotoTaken(true)}
+
+                <label
+                  className={`w-full border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center text-gray-500 hover:bg-gray-50 cursor-pointer ${
+                    selectedPhotos.length >= 5 ? "opacity-50 pointer-events-none" : ""
+                  }`}
+                >
+                  <Camera size={36} className="mb-2" />
+                  <span>Select up to 5 images</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                    onChange={handleFileSelection}
+                  />
+                </label>
+
+                {selectedPhotos.length > 0 && (
+                  <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    {selectedPhotos.map((photo, index) => {
+                      const previewUrl = URL.createObjectURL(photo);
+
+                      return (
+                        <div key={index} className="relative">
+                          <img
+                            src={previewUrl}
+                            alt={`Preview ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg shadow-md cursor-pointer"
+                            onClick={() => setExpandedImage(previewUrl)}
+                          />
+                          <button
+                            className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full"
+                            onClick={() => removePhoto(index)}
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Fullscreen Preview Modal */}
+                {expandedImage && (
+                  <div
+                    className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+                    onClick={() => setExpandedImage(null)}
                   >
-                    <Camera size={36} className="mb-2" />
-                    <span>Take a photo or upload from gallery</span>
-                  </button>
-                ) : (
-                  <div className="relative">
-                    <div className="bg-gray-200 rounded-lg h-48 flex items-center justify-center">
-                      <span className="text-gray-500">Photo added</span>
-                    </div>
-                    <button 
-                      className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full"
-                      onClick={() => setPhotoTaken(false)}
-                    >
-                      <X size={16} />
-                    </button>
+                    <img
+                      src={expandedImage}
+                      alt="Full Preview"
+                      className="max-w-4xl w-full h-auto rounded-lg shadow-xl"
+                    />
                   </div>
                 )}
               </div>
-              
+
               <div className="mb-6">
                 <label className="block text-gray-700 mb-2">Additional Comments</label>
                 <textarea
@@ -775,9 +850,9 @@ export default function TASCApp(): JSX.Element {
                   </div>
                 )}
                 
-                {photoTaken && (
+                {photoCount> 0 && (
                   <div className="mb-4">
-                    <h3 className="font-semibold mb-2">Photos Attached: 1</h3>
+                    <h3 className="font-semibold mb-2">Photos Attached: {photoCount} </h3>
                   </div>
                 )}
               </div>
@@ -790,14 +865,14 @@ export default function TASCApp(): JSX.Element {
               
               <div className="flex justify-between mt-6">
                 <button
-                  className="px-6 py-2 bg-gray-300 text-gray-700 rounded-lg"
+                  className="lg:px-6 lg:py-2 px-2 py-1 bg-gray-300 text-gray-700 rounded-lg"
                   onClick={prevStep}
                   disabled={isSubmitting}
                 >
                   Back
                 </button>
                 <button
-                  className="px-6 py-2 bg-green-600 text-white rounded-lg flex items-center disabled:bg-gray-400"
+                  className="px-2 py-1 lg:px-6 lg:py-2 bg-green-600 text-white rounded-lg flex items-center disabled:bg-gray-400"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
                 >

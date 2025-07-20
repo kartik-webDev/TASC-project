@@ -1,437 +1,559 @@
-"use client"
-import React, {  useEffect } from 'react'
-import  {useAppContext } from '@/context/AppContext';
-import {motion} from 'framer-motion'
-import Image from 'next/image'
-import { Shield, MessageSquare, TrendingUp, CheckCircle, StarIcon } from 'lucide-react';
-import { JSX } from "react";
-import TASCBanner from './TascBanner';
-import SafteyNav from './SafteyNav';
-import WhyTASC from './WhyTasc';
-import FlowChart from './FlowChart';
-import DataGraph from './DataGraph';
+'use client'
+import React, { useState } from 'react';
+import { 
+  Target, Calendar, Cog, ArrowRight, CheckCircle, Users, 
+  BarChart3, Camera,MessageSquare,Shield, Car ,Eye, TrendingUp,
+  Award, ChevronRight
+} from 'lucide-react';
+import Image from 'next/image';
 
-  interface ImageData {
-    src: string,
-    alt: string,
-    jsxType: string
-  }
+import {motion} from "framer-motion"
+import Link from 'next/link';
+
+export default function RideFeedbackHomepage() {
+
+
+    const [activeFeature, setActiveFeature] = useState(0);
   
-  // why tasc component
-
-  // const WhyTASC: React.FC = ()=> <div>
-  //       <div className='mt-60 mb-30'>
-
-  //         <div className='max-w-6xl mx-auto px-8 md:mt-45 mt-15'>
-  //           <h2 className="text-5xl font-bold text-teal-800 mb-4 text-center">Why TASC?</h2>
-
-  //           <motion.div
-  //               className="bg-white rounded-3xl p-10 shadow-lg border-l-4 border-red-500 mt-20"
-  //               initial={{ opacity: 0, x: -30 }}
-  //               whileInView={{ opacity: 1, x: 0 }}
-  //               transition={{ duration: 0.6 }}
-  //               viewport={{ once: false }}
-  //           >
-  //               <h3 className="text-3xl font-semibold text-red-600 mb-6 flex items-center gap-3">
-  //                   <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-  //                       ⚠️
-  //                   </div>
-  //                   The Problem
-  //               </h3>
-  //               <p className="text-xl mb-6 text-gray-700">
-  //                   Ride services today often prioritize speed, pricing, or driver availability — but overlook the actual ride experience from the passenger's point of view.
-  //               </p>
-  //               <div className="grid md:grid-cols-2 gap-4">
-  //                   {[
-  //                       "Unsafe driving practices (rash driving, phone use, ignoring traffic rules)",
-  //                       "Poor vehicle condition (broken seats, bad smell, no seatbelts)",
-  //                       "Unprofessional behavior (rudeness, inappropriate comments, pressure for tips)",
-  //                       "Noise discomfort (honking, loud music, loud phone calls)",
-  //                       "Route manipulation or overcharging"
-  //                   ].map((issue, index) => (
-  //                       <motion.div
-  //                           key={index}
-  //                           className="flex items-start gap-3 p-3 bg-red-50 rounded-lg"
-  //                           initial={{ opacity: 0 }}
-  //                           whileInView={{ opacity: 1 }}
-  //                           transition={{ duration: 0.4, delay: index * 0.1 }}
-  //                           viewport={{ once: true }}
-  //                       >
-  //                           <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
-  //                           <p className="text-gray-700">{issue}</p>
-  //                       </motion.div>
-  //                   ))}
-  //               </div>
-  //               <p className="text-xl mt-6 text-gray-700">
-  //                   These issues may seem "minor" individually — but collectively, they erode trust, dignity, and safety in everyday commuting.
-  //               </p>
-  //           </motion.div>
-  //         </div>
-         
-  //       {/* the gap section */}
-          
-  //         <div className='max-w-6xl mx-auto px-8 md:mt-45 mt-15'>
-
-  //           <motion.div
-  //               className="bg-white rounded-3xl p-10 shadow-lg border-l-4 border-yellow-600 mt-20"
-  //               initial={{ opacity: 0, x: -30 }}
-  //               whileInView={{ opacity: 1, x: 0 }}
-  //               transition={{ duration: 0.6 }}
-  //               viewport={{ once: false }}
-  //           >
-  //               <h3 className="text-3xl font-semibold text-yellow-600 mb-6 flex items-center gap-3">
-  //                   <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
-  //                       🔍
-  //                   </div>
-  //                   The Gap
-  //               </h3>
-  //               <p className="text-xl mb-6 text-gray-700">
-  //                   Current ride platforms often offer limited or general feedback options that:
-  //               </p>
-  //               <div className="space-y-3">
-  //                   {[
-  //                       "Don’t capture the specific issue",
-  //                       "Don’t allow for evidence (photos, voice notes)",
-  //                       "Don’t show real impact (passenger feedback goes into a void)",
-                
-  //                   ].map((issue, index) => (
-  //                       <motion.div
-  //                           key={index}
-  //                           className="flex items-start gap-3 p-3 bg-yellow-50 rounded-lg"
-  //                           initial={{ opacity: 0 }}
-  //                           whileInView={{ opacity: 1 }}
-  //                           transition={{ duration: 0.4, delay: index * 0.1 }}
-  //                           viewport={{ once: true }}
-  //                       >
-  //                           <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 flex-shrink-0"></div>
-  //                           <p className="text-gray-700">{issue}</p>
-  //                       </motion.div>
-  //                   ))}
-  //               </div>
-  //               <p className="text-xl mt-6 text-gray-700">
-  //                   As a result, passengers feel disempowered, and the system fails to correct repeat offenders or recognize great
-  //             drivers.
-  //               </p>
-  //           </motion.div>
-  //         </div>
-
-  //       {/* the solution section */}
-
-  //       <div className='max-w-6xl mx-auto px-8 md:mt-45 mt-15'>
-
-  //         <motion.div
-  //           initial={{ opacity: 0, x: -30 }}
-  //           whileInView={{ opacity: 1, x: 0 }}
-  //           transition={{ duration: 0.6 }}
-  //           viewport={{ once: false }}
-  //         className='bg-gradient-to-r from-green-50 to-teal-50 rounded-3xl p-10 shadow-lg border-l-4 border-green-600'>
-
-  //           <h3 className='text-3xl font-semibold mb-6 text-green-600 flex items-center gap-3'>
-  //           <div className='w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center'>
-  //               ✅
-  //           </div>
-  //           The TASC Solution
-  //         </h3>
-  //         <p className='text-xl mb-6 text-gray-700'>
-  //           TASC flips the narrative:
-  //         </p>
-  //         <div className='space-y-3'>
-  //           {[
-  //             "It puts passengers first by enabling detailed, actionable feedback",
-  //             "It gives every rider a voice that matter",
-  //             "It allows both criticism and appreciation — creating a balanced ecosystem"
-  //           ].map((solution, index)=> (
-  //             <motion.div
-  //             key={index}
-  //             className='flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm'
-  //             initial={{ opacity:0 }}
-  //             whileInView={{opacity:1}}
-  //             transition={{duration:0.6, delay: index * 0.1}}
-  //             viewport={{once: false}}
-  //             >
-  //                 <CheckCircle className='w-5 h-5 text-green-500 flex shrink-0'/>
-  //                 <p className='text-gray-700'>{solution}.</p>
-  //             </motion.div>
-  //           ))}
-  //         </div>
-
-  //         </motion.div>
-  //       </div>
-
-  //       {/* the outcome section */}
-
-  //       <div className='max-w-6xl mx-auto px-8 md:mt-45 mt-15'>
-
-  //         <motion.div
-  //         initial={{ opacity: 0, x: -30 }}
-  //         whileInView={{ opacity: 1, x: 0 }}
-  //         transition={{ duration: 0.6 }}
-  //         viewport={{ once: false }} 
-  //         className='bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-10 shadow-lg border-l-4 border-purple-500'
-  //         >
-  //           <h3 className='text-3xl font-semibold text-purple-600 mb-6 flex items-center gap-3'>
-  //             <div className='w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center'>
-  //               🎯
-  //             </div>
-  //             Meaningful Outcome
-  //           </h3>
-  //           <div className='space-y-3'>
-
-  //             {[
-  //               "Unsafe drivers are flagged more quickly",
-  //               "Great drivers are rewarded and encouraged",
-  //               "Passenger communities gain power to influence service standards",
-  //               "Data-driven improvements help ride companies improve training and maintenance"
-  //             ].map((outcome, index)=> (
-  //               <motion.div
-  //               key={index}
-  //               className="flex items-center gap-3 p-4 bg-white rounded-lg"
-  //               initial={{ opacity: 0 }}
-  //               whileInView={{ opacity: 1 }}
-  //               transition={{ duration: 0.6, delay: index * 0.1 }}
-  //               viewport={{ once: true }}
-  //               >
-  //                 <StarIcon className='w-5 h-5 text-purple-500 flex shrink-0'/>
-  //                 <p className='text-gray-700'>{outcome}</p>
-  //               </motion.div>
-  //             ))}
-
-  //           </div>
-
-  //         </motion.div>
-
-  //       </div>
-  //       </div>
-  // </div>
-
-
-  // how tasc component
-
-  const HowTASC: React.FC = ()=> (
-    <div>
-
-      <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-8">
-        <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-        >
-            <h2 className="text-3xl md:text-5xl font-bold text-teal-800 mb-8">How TASC Works?</h2>
-        </motion.div>
-
-        <div className="space-y-6">
-            {[
-                "After a ride, passengers can rate their experience and highlight safety concerns, vehicle conditions, driver behavior, and overall ride quality.",
-                "Users can check the rating before choosing the driver, TASC help them to achieve comfort, secure and safe ride.",
-                "Instead of just giving a star rating, users can provide detailed feedback, helping ride-hailing services identify issues more precisely.",
-                "Feedback is aggregated and used to adjust driver scores, encouraging better driving practices and enhancing passenger trust.",
-                "Passengers can report issues anonymously, ensuring safety and honest feedback without fear of repercussions."
-            ].map((step, index) => (
-                <motion.div
-                    key={index}
-                    className="flex items-start gap-6 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
-                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    whileHover={{ scale: 1.02 }}
-                >
-                    <div className="w-10 h-10 bg-gradient-to-r from-teal-500 to-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">
-                        {index + 1}
-                    </div>
-                    <p className="text-lg text-gray-700 leading-relaxed">{step}</p>
-                </motion.div>
-              ))}
-          </div>
-      </div>
-    </section>
-
-    </div>
-  )
-
-
-    // jsx component mapping
-
-    const componentMap: { [key: string]: JSX.Element } ={
-      WhyTASC: <WhyTASC/>,
-      HowTASC : <HowTASC />
-    }
-
-
-  const images : ImageData [] = [
-    {src: '/saftey.png', alt: "saftey", jsxType: "WhyTASC" },
-    { src: '/how_tasc.png', alt: "how", jsxType: "HowTASC" },
-  ]
-
-const LandingPage: React.FC = () => {
-
-const {router, setSelectedImage, selectedImage} = useAppContext();
-
-
-// make sure always scolled to top whenever state changes....
-  useEffect(() => {
-    return () => {
-      window.scrollTo(0,0)
-    };
-  }, [selectedImage])
-
-
-    const itemVariants = {
-      hidden: { opacity: 0, y: 30 },
-      visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, ease: "easeOut" }
+    const features = [
+      {
+        title: "Real-Time Feedback System",
+        description: "Comprehensive feedback collection with detailed categories and evidence attachment",
+        icon: <CheckCircle className="w-8 h-8" />,
+        image: "/pass_feed.jpg"
+      },
+      {
+        title: "Driver Accountability",
+        description: "Track driver performance and maintain service quality standards",
+        icon: <Users className="w-8 h-8" />,
+        image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop"
+      },
+      {
+        title: "Safety First",
+        description: "Enhanced safety protocols with incident reporting and prevention",
+        icon: <Shield className="w-8 h-8" />,
+        image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=300&fit=crop"
       }
-  }
+    ];
+  
 
-
-
-    const guideline = ()=>{
-        router.push('/guidelines')
+  const problems = [
+    {
+      title: "Limited Feedback",
+      description: "Generic rating systems don't capture specific issues",
+      icon: "📊",
+      problems: ["1-5 star ratings only", "No detailed categories", "No context provided"]
+    },
+    {
+      title: "No Evidence",
+      description: "Unable to attach photos or voice recordings",
+      icon: "📷",
+      problems: ["Claims can't be verified", "He-said-she-said disputes", "No visual proof"]
+    },
+    {
+      title: "Feedback Void",
+      description: "Passenger complaints disappear without action",
+      icon: "🕳️",
+      problems: ["No follow-up", "No visible impact", "Repeated offenders persist"]
     }
+  ];
 
+  const solutions = [
+    "Detailed, categorized feedback system",
+    "Evidence attachment (photos)",
+    "Community-driven accountability",
+    "Recognition for excellent drivers"
+  ];
+
+    const flowSteps = [
+    { id: 1, title: 'Issue Occurs', icon: '🚨', description: 'Passenger experiences a problem during ride' },
+    { id: 2, title: 'Report via TASC', icon: '📱', description: 'Quick, detailed feedback with evidence' },
+    { id: 3, title: 'Action Taken', icon: '⚡', description: 'Driver coaching or recognition' },
+    { id: 4, title: 'Improvement', icon: '📈', description: 'Better service quality for everyone' }
+  ];
   return (
+    <div className="min-h-screen bg-white">
+     
 
-    <div>
+      {/* Hero Section */}
+      <section className="bg-gray-50 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+              Transform Ride Feedback
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              TASC provides comprehensive feedback systems for ride-sharing platforms, ensuring accountability, safety, and quality service for both drivers and passengers.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+
+              <Link href='/feedback'>
+              <button className="bg-gray-900 text-white px-8 py-4 rounded-md text-lg font-medium hover:bg-gray-800 transition-colors flex items-center justify-center">
+                Start Rating Rides
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
+              </Link>
+          
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <div className="text-center mb-16 mt-16">
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Platform Overview</h2>
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          TASC addresses critical gaps in current ride-sharing feedback systems through innovative evidence collection and transparent accountability measures.
+        </p>
+      </div>
+
       
-        {/* saftey nav bar  */}
 
-        <SafteyNav />
+      <section id="features" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Key Features</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Comprehensive solutions designed to improve transportation service quality and user experience
+            </p>
+          </div>
 
-        {! selectedImage ? (<div className='overflow-hidden space-y-10 mt-15 md:mt-36'>
-
-
-                {/* main banner component */}
-
-                <TASCBanner/>
-
-              {/* what TASC is card section */}
-
-              <section>
-                <div className="max-w-6xl mx-auto px-8">
-                  <div className='text-center mb-16'>
-                    <h2 className='flex flex-col gap-5 text-2xl md:text-5xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent mb-6'>Welcome to TASC — Thoda Aaram Se Chalaiye</h2>
-                    <h3 className='text-2xl md:text-4xl font-bold text-teal-800 mb-8'>What TASC is?</h3>
-                  </div>
-
-                  <div className='grid md:grid-cols-3 gap-8 px-10'>
-                    {[
-                      {
-                          icon: Shield,
-                          title: "Safety First",
-                          content: "TASC is a web platform built to prioritize passenger safety, comfort, and choice in everyday ride services. Whether it's a cab, auto, or shared ride, TASC empowers you—the passenger—to share honest feedback about your experience."
-                      },
-                      {
-                          icon: MessageSquare,
-                          title: "Your Voice Matters",
-                          content: "Through a quick feedback interface, TASC makes it easy for riders to report issues, appreciate good service, and help build a more respectful and reliable transportation ecosystem."
-                      },
-                      {
-                          icon: TrendingUp,
-                          title: "Better Together",
-                          content: "TASC is part of a movement to make rides safer, smoother, and more human—because your voice matters and directly impacts driver ratings and improves ride standards for everyone."
-                      }
-                    ].map((item, index)=> (
-                        <div
-                        key={index}
-                        className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl shadow-black/50 transition-all duration-300 border border-gray-100"
-                        >
-                          <div className='w-12 h-12 bg-gradient-to-r from-teal-500 to-blue-500 rounded-xl flex items-center justify-center mb-6'>
-                            <item.icon className='w-6 h-- text-white' />
-                          </div>
-                          <h4 className='text-xl font-bold text-gray-800 mb-4'>{item.title}</h4>
-                          <p className='text-gray-600 text-justify tracking-tight'>{item.content}</p>
-                        </div>
-                      ))
-                      
-                    }
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              {features.map((feature, index) => (
+                <div 
+                  key={index}
+                  className={`p-6 rounded-lg border-2 transition-all cursor-pointer ${
+                    activeFeature === index 
+                      ? 'border-gray-900 bg-white shadow-lg' 
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => setActiveFeature(index)}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className={`p-2 rounded-lg ${
+                      activeFeature === index ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'
+                    }`}>
+                      {feature.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
-              </section>
-        
-        
-              <section>
-                {/* dynamic image mapping using json object with type saftey */}
-                    <div className='flex flex-col md:gap-40 gap-20 justify-center items-center mt-25 mb-25'>
-                    
-                    {images.map((img, i)=> (
-                      <Image
-                      key={i}
-                      src={img.src}
-                      width={800}
-                      height={500}
-                      alt={img.alt}
-                      className='block cursor-pointer shadow-2xl hover:shadow-amber-400 rounded-2xl'
-                      onClick={()=> setSelectedImage(img.jsxType)}
-                      />
-                    ))}    
-                    </div>
-                </section>
+              ))}
+            </div>
 
-
-  
-
-                            <DataGraph />
-
-                
-                {/* guidelines */}
-
-                <section className="py-20 bg-gradient-to-br from-teal-600 via-blue-600 to-purple-600">
-                  <div className="max-w-4xl mx-auto px-8 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: false }}
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-4">Passenger Guidelines</h2>
-                        <p className="text-xl text-white/90 mb-8">Here are the complete passenger guidelines</p>
-                        <motion.button 
-                            onClick={guideline}
-                            className="bg-white text-gray-800 px-10 py-4 rounded-2xl text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-50 cursor-pointer"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.90 }}
-                        >
-                            View Guidelines
-                        </motion.button>
-                    </motion.div>
-                  </div>
-                </section>
-
-    </div>
-
-       ): (
-          <div className='mt-50'>
-            {componentMap[selectedImage]}
-                <section className="py-20 bg-gradient-to-br from-teal-600 via-blue-600 to-purple-600">
-                  <div className="max-w-4xl mx-auto px-8 text-center">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: false }}
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-4">Passenger Guidelines</h2>
-                        <p className="text-xl text-white/90 mb-8">Here are the complete passenger guidelines</p>
-                        <motion.button 
-                            onClick={guideline}
-                            className="bg-white text-gray-800 px-10 py-4 rounded-2xl text-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-50 cursor-pointer"
-                            whileHover={{ scale: 1.05, y: -2 }}
-                            whileTap={{ scale: 0.90 }}
-                        >
-                            View Guidelines
-                        </motion.button>
-                    </motion.div>
-                  </div>
-                </section>
+            <div className="relative">
+              <img 
+                src={features[activeFeature].image} 
+                alt={features[activeFeature].title}
+                className="rounded-lg shadow-xl w-full h-96 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+            </div>
           </div>
-      )}
-    </div>
-  )
-}
+        </div>
+      </section>
 
-export default LandingPage
+
+
+      {/* passenger and how tasc works */}
+
+       <section className="w-full px-6 py-16 bg-white">
+        <div className="max-w-6xl mx-auto flex flex-col gap-24">
+
+          {/* passenger feedback image */}
+          <div className="flex flex-col lg:flex-row-reverse items-stretch gap-10">
+            <div className="w-full lg:w-1/2 flex justify-center items-center">
+              <Image
+                src="/pass_feed.jpg"
+                alt="Passenger Feedback"
+                width={370}
+                height={370}
+                className="w-full max-w-md lg:max-w-sm h-auto border-b-4 border-r-8 border-amber-600 rounded-2xl"
+              />
+            </div>
+            <div className="w-full lg:w-1/2 flex flex-col justify-center lg:items-start text-center lg:text-left">
+              <h3 className="text-4xl lg:text-6xl font-bold mb-6 text-gray-900">
+                Passenger Feedback System
+              </h3>
+              <p className="text-lg lg:text-2xl text-gray-700 leading-relaxed mb-6">
+                TASC gives passengers a voice that matters. Riders can share honest feedback based on their ride experience — easily and expressively.
+              </p>
+
+              <Link href='/feedback'>
+                <div className="flex items-center gap-2 text-blue-600 hover:text-blue-800 cursor-pointer text-lg lg:text-xl font-semibold">
+                  <span>Know More</span>
+                  <ChevronRight size={24} />
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          {/* how it works image */}
+          <div className="flex flex-col lg:flex-row items-stretch lg:gap-50 gap-10">
+            <div className="w-full lg:w-1/2 flex justify-center items-center">
+              <Image
+                src="/how_it_works.png"
+                alt="how-it-works"
+                width={370}
+                height={370}
+                className="w-full max-w-md lg:max-w-sm h-auto"
+              />
+            </div>
+            <div className="w-full lg:w-1/2 flex flex-col justify-center lg:items-start text-center lg:text-left">
+              <h3 className="text-4xl lg:text-6xl font-bold mb-6 text-gray-900">
+                How <br /> TASC Works
+              </h3>
+              <p className="text-lg lg:text-2xl text-gray-700 leading-relaxed mb-6">
+                TASC transforms feedback into a delightful journey — users share thoughts, upload visuals, and interact with intuitive UI.
+              </p>
+              <Link href='#how'>
+                <div className="flex items-center gap-2 text-blue-600 hover:text-blue-800 cursor-pointer text-lg lg:text-xl font-semibold">
+                  <span>Know More</span>
+                  <ChevronRight size={24} />
+                </div>
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Why Section */}
+      <section id="why" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center mb-6">
+                <Target className="w-8 h-8 text-gray-900 mr-3" />
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Why TASC?</h2>
+              </div>
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Transportation Accountability Crisis</h3>
+                  <p className="text-gray-600">
+                    Current ride-sharing platforms rely on simplistic rating systems that fail to capture specific safety, comfort, and service issues. Passengers have no way to provide detailed feedback or evidence of problems.
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Evidence-Based Safety</h3>
+                  <p className="text-gray-600">
+                    Without proper documentation capabilities, passenger complaints become "he-said-she-said" disputes. Photo and audio evidence collection ensures transparency and helps verify legitimate concerns about driver behavior or vehicle conditions.
+                  </p>
+                </div>
+                
+                <div className="bg-white rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Community-Driven Transportation Quality</h3>
+                  <p className="text-gray-600">
+                    By creating a transparent feedback ecosystem, excellent drivers receive recognition while problematic behavior is addressed. This builds trust and improves overall transportation quality for everyone.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="lg:pl-8">
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                      <Car className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Driver Performance Tracking</h4>
+                      <p className="text-sm text-gray-600">Real-time analytics for driving quality and passenger satisfaction</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                      <Camera className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Trip Evidence Collection</h4>
+                      <p className="text-sm text-gray-600">Photo and audio documentation of ride conditions</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+                      <Shield className="w-6 h-6 text-gray-700" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-gray-900">Passenger Safety Network</h4>
+                      <p className="text-sm text-gray-600">Community-driven safety reporting and verification</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* When Section */}
+      <section id="when" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <Calendar className="w-8 h-8 text-gray-900 mr-3" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">When to Use TASC</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20">
+            
+            {/* Use Cases */}
+            <div className="flex flex-col justify-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-8">Perfect Use Cases</h3>
+              <div className="space-y-6">
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <div className="flex items-center mb-3">
+                    <Eye className="w-5 h-5 text-gray-700 mr-2" />
+                    <h4 className="font-semibold text-gray-900">Safety Concerns</h4>
+                  </div>
+                  <p className="text-gray-600 text-sm">
+                    When you need to document unsafe driving, vehicle conditions, or inappropriate behavior with evidence
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <div className="flex items-center mb-3">
+                    <Award className="w-5 h-5 text-gray-700 mr-2" />
+                    <h4 className="font-semibold text-gray-900">Exceptional Service</h4>
+                  </div>
+                  <p className="text-gray-600 text-sm">
+                    When drivers go above and beyond, providing detailed recognition and specific examples of excellence
+                  </p>
+                </div>
+
+                <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <div className="flex items-center mb-3">
+                    <TrendingUp className="w-5 h-5 text-gray-700 mr-2" />
+                    <h4 className="font-semibold text-gray-900">Service Quality Issues</h4>
+                  </div>
+                  <p className="text-gray-600 text-sm">
+                    When standard ratings don't capture specific issues like vehicle cleanliness, navigation problems, or communication barriers
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side Image */}
+            <div className="flex justify-center items-center">
+              <Image
+                src="/use_cases.png"
+                alt="Tasc use cases"
+                width={345}
+                height={200}
+                className="rounded-xl w-full max-w-sm object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How Section */}
+      <section id="how" className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="flex items-center justify-center mb-6">
+              <Cog className="w-8 h-8 text-gray-900 mr-3" />
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">How It Works</h2>
+            </div>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              A comprehensive approach combining mobile technology, community verification, and transportation industry partnerships.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white rounded-lg p-8 border border-gray-200">
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
+                <Camera className="w-6 h-6 text-gray-700" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Trip Evidence Collection</h3>
+              <p className="text-gray-600 mb-4">
+                Passengers can document their ride experience with photos of vehicle conditions, audio recordings of interactions, and location-verified evidence.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-2">
+                <li>• Vehicle interior/exterior photos</li>
+                <li>• Audio recording of interactions</li>
+                <li>• GPS-verified trip documentation</li>
+                <li>• Time-stamped evidence collection</li>
+              </ul>
+            </div>
+            
+            <div className="bg-white rounded-lg p-8 border border-gray-200">
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
+                <MessageSquare className="w-6 h-6 text-gray-700" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Detailed Feedback Categories</h3>
+              <p className="text-gray-600 mb-4">
+                Multi-dimensional rating system covering safety, comfort, communication, vehicle condition, and navigation skills with specific contextual feedback.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-2">
+                <li>• Safety and driving behavior</li>
+                <li>• Vehicle cleanliness and comfort</li>
+                <li>• Communication and professionalism</li>
+                <li>• Navigation and route efficiency</li>
+              </ul>
+            </div>
+            
+            <div className="bg-white rounded-lg p-8 border border-gray-200">
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-6">
+                <BarChart3 className="w-6 h-6 text-gray-700" />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">Community Impact Tracking</h3>
+              <p className="text-gray-600 mb-4">
+                Real-time dashboard showing how feedback leads to concrete improvements, driver recognition, and overall transportation quality enhancement.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-2">
+                <li>• Driver improvement metrics</li>
+                <li>• Community safety scores</li>
+                <li>• Feedback resolution tracking</li>
+                <li>• Excellence recognition system</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* <div className="bg-white rounded-2xl p-8 border border-gray-200">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">Platform Implementation</h3>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Mobile App Features</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Real-time ride tracking and evidence collection interface</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">One-tap photo/audio evidence submission with automatic metadata</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Detailed feedback forms with category-specific questions</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Driver recognition and appreciation features</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div>
+                <h4 className="text-lg font-semibold text-gray-900 mb-4">Community & Verification</h4>
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Peer verification system for feedback authenticity</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Public driver profiles with verified feedback history</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Anonymous reporting with privacy protection</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-gray-600">Integration with existing ride-sharing platforms</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+        </div>
+      </section>
+
+      {/* how tasc work a proper work flow */}
+
+      <div className="w-full bg-gray-50 px-6 py-16  flex justify-center ">
+        <div className="w-full max-w-7xl bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-gray-300">
+          <h3 className="text-2xl font-bold text-gray-800 mb-8 text-center">TASC Process Flow</h3>
+          
+          <div className="space-y-6">
+            {flowSteps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2 }}
+                className="relative"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-sky-500 to-indigo-500 rounded-2xl flex items-center justify-center text-white font-bold shadow-lg">
+                    {step.id}
+                  </div>
+                  <div className="flex-1">
+                    <div className="bg-gradient-to-r from-sky-50 to-indigo-50 rounded-xl p-4 border border-sky-200">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="text-2xl">{step.icon}</span>
+                        <h4 className="font-bold text-gray-800">{step.title}</h4>
+                      </div>
+                      <p className="text-gray-600 text-sm">{step.description}</p>
+                    </div>
+                  </div>
+                </div>
+                {index < flowSteps.length - 1 && (
+                  <div className="w-0.5 h-6 bg-gradient-to-b from-sky-500 to-indigo-500 ml-6 rounded-full"></div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      
+            {/* Project Overview */}
+      <section id="overview" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+
+          {/* Current Problems */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Current Problems in Ride Feedback</h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {problems.map((problem, index) => (
+                <div key={index} className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <div className="text-4xl mb-4">{problem.icon}</div>
+                  <h4 className="text-xl font-semibold text-gray-900 mb-2">{problem.title}</h4>
+                  <p className="text-gray-600 mb-4">{problem.description}</p>
+                  <ul className="space-y-2">
+                    {problem.problems.map((item, idx) => (
+                      <li key={idx} className="text-sm text-gray-500 flex items-center">
+                        <div className="w-2 h-2 bg-gray-400 rounded-full mr-3"></div>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Our Solutions */}
+          <div className="bg-gray-900 rounded-2xl p-8 text-white">
+            <h3 className="text-2xl font-bold mb-6 text-center">Our Transportation Solutions</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {solutions.map((solution, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <CheckCircle className="w-6 h-6 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-100">{solution}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+   
+    </div>
+  );
+}

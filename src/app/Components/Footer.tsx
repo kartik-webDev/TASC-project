@@ -33,9 +33,16 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
+
+            <p className="pt-4 text-center text-sm pb-5">Made with
+                <span className="text-red-500">❤</span>
+                by Kartik
+            </p>
+
             <p className="pt-4 text-center text-sm pb-5">
                 Copyright {new Date().getFullYear()} © TASC. All Right Reserved.
             </p>
+
         </footer>
     )
 }

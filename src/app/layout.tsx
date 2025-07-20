@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider>
       <body>
-        <AppContextProvider>z
+        <AppContextProvider>
           <Navbar />
           <Toaster/>
           

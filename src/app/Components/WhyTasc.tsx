@@ -16,6 +16,8 @@ const WhyTASC: React.FC = () => {
     { name: 'Route Manipulation', value: 5, color: '#ec4899' }
   ];
 
+  
+
   const satisfactionData = [
     { platform: 'Traditional Platforms', before: 2.8, after: 2.9 },
     { platform: 'TASC-Enabled', before: 2.8, after: 4.6 }
@@ -84,7 +86,7 @@ const WhyTASC: React.FC = () => {
         </div>
 
         {/* Problems Section */}
-        {activeTab === 'problems' && (
+        
           <motion.div
             key="problems"
             initial={{ opacity: 0, x: -50 }}
@@ -170,10 +172,10 @@ const WhyTASC: React.FC = () => {
               </div>
             </div>
           </motion.div>
-        )}
+     
 
         {/* Gap Section */}
-        {activeTab === 'gap' && (
+       
           <motion.div
             key="gap"
             initial={{ opacity: 0, x: -50 }}
@@ -240,10 +242,9 @@ const WhyTASC: React.FC = () => {
               </div>
             </div>
           </motion.div>
-        )}
-
+       
         {/* Solution Section */}
-        {activeTab === 'solution' && (
+        
           <motion.div
             key="solution"
             initial={{ opacity: 0, x: -50 }}
@@ -330,10 +331,10 @@ const WhyTASC: React.FC = () => {
               </div>
             </div>
           </motion.div>
-        )}
+       
 
         {/* Impact Section */}
-        {activeTab === 'impact' && (
+        
           <motion.div
             key="impact"
             initial={{ opacity: 0, x: -50 }}
@@ -459,7 +460,7 @@ const WhyTASC: React.FC = () => {
               </div>
             </div>
           </motion.div>
-        )}
+        
       </div>
     </div>
   );

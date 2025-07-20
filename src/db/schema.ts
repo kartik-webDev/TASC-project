@@ -16,7 +16,7 @@ export const feedbacks = pgTable('feedbacks', {
   id: serial('id').primaryKey(),
   vehicleNumber: text('vehicle_number').notNull(),
   userId: varchar('user_id', { length: 255 }).references(() => users.id, {
-    onDelete: 'set null', // or 'cascade' depending on your use case
+    onDelete: 'set null', // or 'cascade' depending on use case
   }),
 
   // Feedback data...

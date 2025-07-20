@@ -96,7 +96,7 @@ const LoginPage = () => {
         )}
 
         {/* Sign Up or Login Button */}
-        <button className="bg-indigo-500 hover:bg-indigo-600 transition-all text-white w-full py-2 rounded-md cursor-pointer">
+        <button className="bg-black transition-all text-white w-full py-2 rounded-md cursor-pointer">
           {state === "register" ? "Create Account" : "Login"}
         </button>
 

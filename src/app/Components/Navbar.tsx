@@ -51,27 +51,25 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="mb-30">
-      <nav className="fixed top-0 left-0 bg-gradient-to-br from-teal-600 via-blue-600 to-purple-600 w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 duration-500 z-50 py-4 md:py-6">
+    <div className="mb-9 lg:mb-18">
+      <nav className="fixed top-0 left-0 bg-white w-full flex items-center justify-between border-b border-gray-100 px-4 md:px-16 lg:px-24 xl:px-32 duration-500 z-50 py-4 md:py-2">
         {/* Logo */}
         <div className="flex items-center gap-4">
-          <Link href='/'>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <span className="text-xl font-black text-white">T</span>
-            </div>
-          </Link>
+
+        <Link href='/'>
           <div>
-            <h1 className="text-xl font-black text-white tracking-tight hidden md:block">TASC</h1>
-            <p className="text-blue-100 font-medium text-sm hidden md:block">Thoda Aaram Se Chalaiye</p>
+            <h1 className="text-xl font-black text-black tracking-tight  md:block">TASC</h1>
+            {/* <p className="text-black font-medium text-xl hidden md:block">TASC</p> */}
           </div>
+        </Link>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex text-xl items-center gap-4 lg:gap-18">
+        <div className="hidden md:flex items-center gap-4 lg:gap-18">
           {navLinks.map((link, i) => (
-            <Link key={i} href={link.path} className="group flex flex-col gap-0.5 text-white">
+            <Link key={i} href={link.path} className="group flex flex-col gap-0.5 text-black">
               {link.name}
-              <div className="bg-white h-0.5 w-0 group-hover:w-full transition-all duration-300" />
+              <div className="bg-black h-0.5 w-0 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
         </div>
